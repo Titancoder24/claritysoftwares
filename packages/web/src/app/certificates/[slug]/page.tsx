@@ -1,95 +1,265 @@
 "use client";
 
-import { Award, CheckCircle, Calendar, User, BookOpen, Download, ExternalLink } from "lucide-react";
+import React from "react";
+import {
+  Award,
+  CheckCircle2,
+  Shield,
+  Calendar,
+  BookOpen,
+  User,
+  GraduationCap,
+  Download,
+  Share2,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { CertificateCard, type CertificateData } from "@/components/academy/CertificateCard";
+import { cn } from "@/lib/utils";
 
-export default function CertificateVerificationPage() {
-  const certificate = {
-    id: "cert-001",
-    learnerName: "Alex Johnson",
-    courseName: "Advanced Product Onboarding",
-    issuedAt: "2024-12-15",
-    expiresAt: "2025-12-15",
-    verificationSlug: "sf-cert-a1b2c3d4",
-    workspaceName: "Acme Corp",
-    verified: true,
-  };
+const MOCK_CERTIFICATE: CertificateData = {
+  id: "cert-SF-2026-0304-A1B2",
+  courseName: "Getting Started with ScreenFlow",
+  courseDescription:
+    "A comprehensive introduction to screen recording, video editing, and sharing with ScreenFlow. Covers the interface, recording, editing, effects, and exporting.",
+  learnerName: "John Doe",
+  completionDate: "March 4, 2026",
+  certificateNumber: "SF-2026-0304-A1B2",
+  verificationUrl: "https://screenflow.app/certificates/SF-2026-0304-A1B2",
+  issuerName: "ScreenFlow Academy",
+  score: 92,
+  hoursCompleted: 3,
+};
+
+export default function CertificateVerificationPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const resolvedParams = React.use(params);
+  const certificate = MOCK_CERTIFICATE;
+  const isValid = true;
 
   return (
-    <div className="min-h-screen bg-[#09090b] flex flex-col">
-      <header className="border-b border-zinc-800/50 px-6 py-4">
-        <div className="mx-auto max-w-4xl flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center">
-              <span className="text-sm font-bold text-white">S</span>
+    <div className="min-h-screen bg-[#09090b]">
+      {/* Header */}
+      <header className="border-b border-border">
+        <div className="mx-auto max-w-4xl px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600">
+                <GraduationCap className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-lg font-semibold text-foreground">ScreenFlow Academy</h1>
+                <p className="text-xs text-muted-foreground">Certificate Verification</p>
+              </div>
             </div>
-            <span className="text-lg font-semibold text-white">ScreenFlow</span>
           </div>
-          <span className="text-sm text-zinc-500">Certificate Verification</span>
         </div>
       </header>
 
-      <main className="flex-1 px-6 py-16">
-        <div className="mx-auto max-w-2xl">
-          <div className="mb-8 flex justify-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2">
-              <CheckCircle className="h-5 w-5 text-emerald-400" />
-              <span className="text-sm font-medium text-emerald-400">Verified Certificate</span>
+      <main className="mx-auto max-w-4xl px-6 py-12">
+        {/* Verification Status Banner */}
+        <div
+          className={cn(
+            "mb-8 flex items-center gap-4 rounded-xl border p-5",
+            isValid
+              ? "border-emerald-500/20 bg-emerald-500/5"
+              : "border-red-500/20 bg-red-500/5"
+          )}
+        >
+          <div
+            className={cn(
+              "flex h-12 w-12 items-center justify-center rounded-full",
+              isValid ? "bg-emerald-500/15" : "bg-red-500/15"
+            )}
+          >
+            {isValid ? (
+              <CheckCircle2 className="h-6 w-6 text-emerald-400" />
+            ) : (
+              <Shield className="h-6 w-6 text-red-400" />
+            )}
+          </div>
+          <div className="flex-1">
+            <h2
+              className={cn(
+                "text-base font-semibold",
+                isValid ? "text-emerald-400" : "text-red-400"
+              )}
+            >
+              {isValid ? "Verified Certificate" : "Certificate Not Found"}
+            </h2>
+            <p className="mt-0.5 text-sm text-muted-foreground">
+              {isValid
+                ? "This certificate is authentic and was issued by ScreenFlow Academy."
+                : "We could not verify this certificate. It may be invalid or expired."}
+            </p>
+          </div>
+          <Badge
+            variant={isValid ? "success" : "destructive"}
+            className="text-xs"
+          >
+            {isValid ? "Valid" : "Invalid"}
+          </Badge>
+        </div>
+
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
+          {/* Certificate Preview */}
+          <div className="lg:col-span-3">
+            <CertificateCard certificate={certificate} variant="preview" />
+
+            {/* Actions */}
+            <div className="mt-4 flex items-center gap-3">
+              <Button className="flex-1">
+                <Download className="h-4 w-4" />
+                Download PDF
+              </Button>
+              <Button variant="outline" className="flex-1">
+                <Share2 className="h-4 w-4" />
+                Share
+              </Button>
             </div>
           </div>
 
-          <div className="rounded-2xl border border-zinc-800 bg-[#0c0c0f] overflow-hidden">
-            <div className="relative bg-gradient-to-br from-indigo-500/20 via-violet-500/10 to-transparent px-8 py-12 text-center">
-              <Award className="mx-auto h-16 w-16 text-indigo-400 mb-4" />
-              <h1 className="text-3xl font-bold text-white mb-2">Certificate of Completion</h1>
-              <p className="text-zinc-400">This certifies that</p>
+          {/* Details Sidebar */}
+          <div className="lg:col-span-2 space-y-4">
+            {/* Certificate Details */}
+            <div className="rounded-xl border border-border bg-card">
+              <div className="border-b border-border px-4 py-3">
+                <h3 className="text-sm font-semibold text-foreground">Certificate Details</h3>
+              </div>
+              <div className="space-y-4 p-4">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-zinc-800">
+                    <Shield className="h-4 w-4 text-indigo-400" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                      Certificate ID
+                    </p>
+                    <p className="mt-0.5 font-mono text-sm text-foreground">
+                      {certificate.certificateNumber}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-zinc-800">
+                    <User className="h-4 w-4 text-emerald-400" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                      Recipient
+                    </p>
+                    <p className="mt-0.5 text-sm text-foreground">{certificate.learnerName}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-zinc-800">
+                    <Calendar className="h-4 w-4 text-amber-400" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                      Issued Date
+                    </p>
+                    <p className="mt-0.5 text-sm text-foreground">{certificate.completionDate}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-zinc-800">
+                    <Award className="h-4 w-4 text-violet-400" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                      Issuer
+                    </p>
+                    <p className="mt-0.5 text-sm text-foreground">{certificate.issuerName}</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="px-8 py-10 space-y-8">
-              <div className="text-center">
-                <h2 className="text-2xl font-bold text-white mb-1">{certificate.learnerName}</h2>
-                <p className="text-zinc-400">has successfully completed</p>
-                <h3 className="mt-3 text-xl font-semibold bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
-                  {certificate.courseName}
-                </h3>
+            {/* Course Details */}
+            <div className="rounded-xl border border-border bg-card">
+              <div className="border-b border-border px-4 py-3">
+                <h3 className="text-sm font-semibold text-foreground">Course Information</h3>
               </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: Calendar, label: "Issued", value: certificate.issuedAt },
-                  { icon: Calendar, label: "Expires", value: certificate.expiresAt },
-                  { icon: User, label: "Issued by", value: certificate.workspaceName },
-                  { icon: BookOpen, label: "Credential ID", value: certificate.verificationSlug, mono: true },
-                ].map((item) => (
-                  <div key={item.label} className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4">
-                    <div className="flex items-center gap-2 text-zinc-500 mb-1">
-                      <item.icon className="h-4 w-4" />
-                      <span className="text-xs font-medium uppercase tracking-wider">{item.label}</span>
-                    </div>
-                    <p className={`text-sm text-white ${item.mono ? "font-mono" : ""}`}>{item.value}</p>
+              <div className="p-4 space-y-3">
+                <div>
+                  <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                    Course Name
+                  </p>
+                  <p className="mt-0.5 text-sm font-medium text-foreground">
+                    {certificate.courseName}
+                  </p>
+                </div>
+                {certificate.courseDescription && (
+                  <div>
+                    <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                      Description
+                    </p>
+                    <p className="mt-0.5 text-sm text-muted-foreground leading-relaxed">
+                      {certificate.courseDescription}
+                    </p>
                   </div>
-                ))}
+                )}
+                <div className="grid grid-cols-2 gap-3 pt-1">
+                  {certificate.score !== undefined && (
+                    <div className="rounded-lg bg-zinc-900/50 p-3">
+                      <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                        Final Score
+                      </p>
+                      <p className="mt-1 text-lg font-bold text-foreground">
+                        {certificate.score}%
+                      </p>
+                    </div>
+                  )}
+                  {certificate.hoursCompleted && (
+                    <div className="rounded-lg bg-zinc-900/50 p-3">
+                      <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                        Hours
+                      </p>
+                      <p className="mt-1 text-lg font-bold text-foreground">
+                        {certificate.hoursCompleted}h
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
+            </div>
 
-              <div className="flex items-center justify-center gap-3 pt-4">
-                <button className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-indigo-500 to-violet-500 px-5 py-2.5 text-sm font-medium text-white hover:opacity-90 transition-opacity">
-                  <Download className="h-4 w-4" />
-                  Download PDF
-                </button>
-                <button className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800/50 px-5 py-2.5 text-sm font-medium text-zinc-300 hover:bg-zinc-800 transition-colors">
-                  <ExternalLink className="h-4 w-4" />
-                  Share
-                </button>
+            {/* Verification Info */}
+            <div className="rounded-lg border border-border bg-zinc-900/30 p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Shield className="h-4 w-4 text-zinc-500" />
+                <span className="text-xs font-medium text-muted-foreground">
+                  Cryptographically Verified
+                </span>
               </div>
+              <p className="text-xs text-zinc-600 leading-relaxed">
+                This certificate is cryptographically signed and can be independently verified.
+                The verification URL provides permanent proof of this credential.
+              </p>
             </div>
           </div>
         </div>
       </main>
 
-      <footer className="border-t border-zinc-800/50 px-6 py-4">
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="text-xs text-zinc-600">
-            Verified by ScreenFlow. This certificate was issued on the ScreenFlow platform.
-          </p>
+      {/* Footer */}
+      <footer className="border-t border-border mt-12">
+        <div className="mx-auto max-w-4xl px-6 py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <GraduationCap className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm text-muted-foreground">ScreenFlow Academy</span>
+            </div>
+            <p className="text-xs text-zinc-600">
+              Powered by ScreenFlow
+            </p>
+          </div>
         </div>
       </footer>
     </div>
