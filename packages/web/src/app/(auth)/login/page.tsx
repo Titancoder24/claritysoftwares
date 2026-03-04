@@ -2,20 +2,71 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Mail, Lock, ArrowRight, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { createClient } from "@/lib/supabase-client";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [loading, setLoading] = React.useState(false);
+  const [oauthLoading, setOauthLoading] = React.useState<string | null>(null);
+  const [error, setError] = React.useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
     setLoading(true);
-    // Simulate login
-    setTimeout(() => setLoading(false), 2000);
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      const supabase = createClient();
+      const { error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (authError) {
+        setError(authError.message);
+        setLoading(false);
+        return;
+      }
+
+      router.push("/");
+      router.refresh();
+    } catch {
+      setError("Something went wrong. Please try again.");
+      setLoading(false);
+    }
+  };
+
+  const handleOAuth = async (provider: "google" | "github") => {
+    setError(null);
+    setOauthLoading(provider);
+
+    try {
+      const supabase = createClient();
+      const { error: authError } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+
+      if (authError) {
+        setError(authError.message);
+        setOauthLoading(null);
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
+      setOauthLoading(null);
+    }
   };
 
   return (
@@ -30,9 +81,21 @@ export default function LoginPage() {
           </p>
         </div>
 
+        {error && (
+          <div className="mb-4 rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+            {error}
+          </div>
+        )}
+
         {/* Social Login */}
         <div className="grid grid-cols-2 gap-3">
-          <Button variant="outline" size="md" className="w-full">
+          <Button
+            variant="outline"
+            size="md"
+            className="w-full"
+            onClick={() => handleOAuth("google")}
+            disabled={oauthLoading !== null || loading}
+          >
             <svg className="h-4 w-4" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
@@ -51,11 +114,17 @@ export default function LoginPage() {
                 fill="#EA4335"
               />
             </svg>
-            Google
+            {oauthLoading === "google" ? "Connecting..." : "Google"}
           </Button>
-          <Button variant="outline" size="md" className="w-full">
+          <Button
+            variant="outline"
+            size="md"
+            className="w-full"
+            onClick={() => handleOAuth("github")}
+            disabled={oauthLoading !== null || loading}
+          >
             <Github className="h-4 w-4" />
-            GitHub
+            {oauthLoading === "github" ? "Connecting..." : "GitHub"}
           </Button>
         </div>
 
@@ -69,10 +138,12 @@ export default function LoginPage() {
         {/* Email Login */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">
+            <label htmlFor="email" className="text-sm font-medium text-foreground">
               Email
             </label>
             <Input
+              id="email"
+              name="email"
               type="email"
               placeholder="you@company.com"
               icon={<Mail className="h-4 w-4" />}
@@ -82,7 +153,7 @@ export default function LoginPage() {
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-foreground">
+              <label htmlFor="password" className="text-sm font-medium text-foreground">
                 Password
               </label>
               <Link
@@ -93,6 +164,8 @@ export default function LoginPage() {
               </Link>
             </div>
             <Input
+              id="password"
+              name="password"
               type="password"
               placeholder="Enter your password"
               icon={<Lock className="h-4 w-4" />}
@@ -100,7 +173,12 @@ export default function LoginPage() {
             />
           </div>
 
-          <Button type="submit" className="w-full" loading={loading}>
+          <Button
+            type="submit"
+            className="w-full"
+            loading={loading}
+            disabled={oauthLoading !== null}
+          >
             Sign In
             <ArrowRight className="h-4 w-4" />
           </Button>

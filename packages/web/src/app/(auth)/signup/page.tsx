@@ -2,11 +2,13 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Mail, Lock, User, ArrowRight, Github, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { createClient } from "@/lib/supabase-client";
 
 const features = [
   "Unlimited screen recordings",
@@ -16,13 +18,106 @@ const features = [
 ];
 
 export default function SignupPage() {
+  const router = useRouter();
   const [loading, setLoading] = React.useState(false);
+  const [oauthLoading, setOauthLoading] = React.useState<string | null>(null);
+  const [error, setError] = React.useState<string | null>(null);
+  const [success, setSuccess] = React.useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
     setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
+
+    const formData = new FormData(e.currentTarget);
+    const firstName = formData.get("firstName") as string;
+    const lastName = formData.get("lastName") as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const supabase = createClient();
+      const { error: authError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            first_name: firstName,
+            last_name: lastName,
+            full_name: `${firstName} ${lastName}`,
+          },
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+
+      if (authError) {
+        setError(authError.message);
+        setLoading(false);
+        return;
+      }
+
+      setSuccess(true);
+      setLoading(false);
+    } catch {
+      setError("Something went wrong. Please try again.");
+      setLoading(false);
+    }
   };
+
+  const handleOAuth = async (provider: "google" | "github") => {
+    setError(null);
+    setOauthLoading(provider);
+
+    try {
+      const supabase = createClient();
+      const { error: authError } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+
+      if (authError) {
+        setError(authError.message);
+        setOauthLoading(null);
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
+      setOauthLoading(null);
+    }
+  };
+
+  if (success) {
+    return (
+      <Card className="border-zinc-800/50">
+        <CardContent className="p-8 text-center">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10">
+            <Check className="h-6 w-6 text-emerald-400" />
+          </div>
+          <h2 className="text-xl font-semibold text-foreground">
+            Check your email
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            We sent a confirmation link to your email address. Click it to
+            activate your account.
+          </p>
+          <Link
+            href="/login"
+            className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+          >
+            Back to sign in
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="border-zinc-800/50">
@@ -36,9 +131,21 @@ export default function SignupPage() {
           </p>
         </div>
 
+        {error && (
+          <div className="mb-4 rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+            {error}
+          </div>
+        )}
+
         {/* Social Signup */}
         <div className="grid grid-cols-2 gap-3">
-          <Button variant="outline" size="md" className="w-full">
+          <Button
+            variant="outline"
+            size="md"
+            className="w-full"
+            onClick={() => handleOAuth("google")}
+            disabled={oauthLoading !== null || loading}
+          >
             <svg className="h-4 w-4" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
@@ -57,11 +164,17 @@ export default function SignupPage() {
                 fill="#EA4335"
               />
             </svg>
-            Google
+            {oauthLoading === "google" ? "Connecting..." : "Google"}
           </Button>
-          <Button variant="outline" size="md" className="w-full">
+          <Button
+            variant="outline"
+            size="md"
+            className="w-full"
+            onClick={() => handleOAuth("github")}
+            disabled={oauthLoading !== null || loading}
+          >
             <Github className="h-4 w-4" />
-            GitHub
+            {oauthLoading === "github" ? "Connecting..." : "GitHub"}
           </Button>
         </div>
 
@@ -76,28 +189,32 @@ export default function SignupPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">
+              <label htmlFor="firstName" className="text-sm font-medium text-foreground">
                 First name
               </label>
               <Input
+                id="firstName"
+                name="firstName"
                 placeholder="John"
                 icon={<User className="h-4 w-4" />}
                 required
               />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">
+              <label htmlFor="lastName" className="text-sm font-medium text-foreground">
                 Last name
               </label>
-              <Input placeholder="Doe" required />
+              <Input id="lastName" name="lastName" placeholder="Doe" required />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">
+            <label htmlFor="email" className="text-sm font-medium text-foreground">
               Work email
             </label>
             <Input
+              id="email"
+              name="email"
               type="email"
               placeholder="you@company.com"
               icon={<Mail className="h-4 w-4" />}
@@ -106,21 +223,29 @@ export default function SignupPage() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">
+            <label htmlFor="password" className="text-sm font-medium text-foreground">
               Password
             </label>
             <Input
+              id="password"
+              name="password"
               type="password"
               placeholder="Create a strong password"
               icon={<Lock className="h-4 w-4" />}
               required
+              minLength={8}
             />
             <p className="text-xs text-muted-foreground">
-              Must be at least 8 characters with a number and symbol
+              Must be at least 8 characters
             </p>
           </div>
 
-          <Button type="submit" className="w-full" loading={loading}>
+          <Button
+            type="submit"
+            className="w-full"
+            loading={loading}
+            disabled={oauthLoading !== null}
+          >
             Create Account
             <ArrowRight className="h-4 w-4" />
           </Button>
@@ -129,7 +254,7 @@ export default function SignupPage() {
         {/* Features */}
         <div className="mt-6 rounded-lg bg-muted/50 p-4">
           <p className="mb-2 text-xs font-medium text-foreground">
-            What you get with your free trial:
+            Included in your free trial:
           </p>
           <ul className="space-y-1.5">
             {features.map((feature) => (
