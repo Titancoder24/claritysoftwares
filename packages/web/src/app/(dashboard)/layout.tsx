@@ -30,7 +30,7 @@ interface NavItem {
 }
 
 const mainNav: NavItem[] = [
-  { label: "Dashboard", href: "/", icon: LayoutDashboard },
+  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "Recordings", href: "/recordings", icon: Video },
   { label: "Editor", href: "/editor", icon: Film },
   { label: "Knowledge Base", href: "/knowledge-base", icon: BookOpen },
@@ -58,8 +58,8 @@ function SidebarLink({
       className={cn(
         "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
         isActive
-          ? "bg-primary/10 text-primary"
-          : "text-sidebar-foreground hover:bg-muted hover:text-foreground",
+          ? "bg-white/10 text-white shadow-sm ring-1 ring-white/10"
+          : "text-zinc-400 hover:bg-white/5 hover:text-white",
         collapsed && "justify-center px-2.5"
       )}
     >
@@ -67,7 +67,7 @@ function SidebarLink({
         className={cn(
           "h-[18px] w-[18px] shrink-0 transition-colors",
           isActive
-            ? "text-primary"
+            ? "text-white"
             : "text-zinc-500 group-hover:text-zinc-300"
         )}
       />
@@ -98,14 +98,14 @@ export default function DashboardLayout({
       {/* Sidebar */}
       <aside
         className={cn(
-          "flex flex-col border-r border-border bg-sidebar transition-all duration-300 ease-in-out",
+          "flex flex-col border-r border-white/[0.05] bg-black/40 backdrop-blur-xl transition-all duration-300 ease-in-out relative z-20",
           collapsed ? "w-[60px]" : "w-[240px]"
         )}
       >
         {/* Logo */}
         <div
           className={cn(
-            "flex h-14 items-center border-b border-border px-4",
+            "flex h-16 items-center border-b border-white/[0.05] px-5",
             collapsed && "justify-center px-2"
           )}
         >
@@ -128,7 +128,7 @@ export default function DashboardLayout({
         {/* Quick Actions */}
         {!collapsed && (
           <div className="px-3 pt-4 pb-2">
-            <button className="flex w-full items-center gap-2 rounded-lg border border-dashed border-zinc-700 px-3 py-2 text-sm text-muted-foreground transition-colors hover:border-zinc-500 hover:text-foreground">
+            <button className="flex w-full items-center gap-2 rounded-xl border border-dashed border-white/10 bg-white/[0.02] px-3 py-2.5 text-sm text-zinc-400 transition-all hover:border-white/20 hover:bg-white/[0.04] hover:text-white">
               <Plus className="h-4 w-4" />
               <span>New Recording</span>
               <kbd className="ml-auto rounded bg-muted px-1.5 py-0.5 text-[10px] font-mono text-zinc-500">
@@ -148,8 +148,8 @@ export default function DashboardLayout({
           <nav className="flex flex-col gap-0.5">
             {mainNav.map((item) => {
               const isActive =
-                item.href === "/"
-                  ? pathname === "/"
+                item.href === "/dashboard"
+                  ? pathname === "/dashboard"
                   : pathname.startsWith(item.href);
               return (
                 <SidebarLink
@@ -181,7 +181,7 @@ export default function DashboardLayout({
         {/* User section */}
         <div
           className={cn(
-            "flex items-center border-t border-border p-3",
+            "flex items-center border-t border-white/[0.05] p-3",
             collapsed ? "justify-center" : "gap-3"
           )}
         >
@@ -204,7 +204,7 @@ export default function DashboardLayout({
         </div>
 
         {/* Collapse toggle */}
-        <div className="border-t border-border p-2">
+        <div className="border-t border-white/[0.05] p-2">
           <button
             onClick={() => setCollapsed(!collapsed)}
             className={cn(
@@ -223,14 +223,14 @@ export default function DashboardLayout({
       {/* Main Content */}
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* Top bar */}
-        <header className="flex h-14 items-center justify-between border-b border-border bg-background px-6">
+        <header className="flex h-16 items-center justify-between border-b border-white/[0.05] bg-black/20 backdrop-blur-md px-6 relative z-10">
           <div className="flex items-center gap-3">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" />
               <input
                 type="text"
                 placeholder="Search..."
-                className="h-9 w-64 rounded-lg border border-border bg-muted pl-9 pr-3 text-sm text-foreground placeholder:text-zinc-500 transition-all focus:outline-none focus:ring-2 focus:ring-ring/50 focus:border-primary focus:w-80"
+                className="h-9 w-64 rounded-full border border-white/10 bg-black/40 pl-9 pr-3 text-sm text-white placeholder:text-zinc-500 transition-all focus:outline-none focus:ring-1 focus:ring-white/20 focus:w-80 shadow-inner"
               />
               <kbd className="absolute right-3 top-1/2 -translate-y-1/2 rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] font-mono text-zinc-500">
                 /
@@ -238,7 +238,7 @@ export default function DashboardLayout({
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <button className="relative rounded-lg p-2 text-zinc-500 transition-colors hover:bg-muted hover:text-foreground">
+            <button className="relative rounded-full p-2 text-zinc-400 transition-colors hover:bg-white/10 hover:text-white">
               <Bell className="h-4 w-4" />
               <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-primary" />
             </button>
@@ -247,8 +247,14 @@ export default function DashboardLayout({
 
         {/* Page Content */}
         <main className="flex-1 overflow-y-auto">
-          <div className="mx-auto max-w-7xl px-6 py-8">
-            {children}
+          <div className="mx-auto max-w-7xl px-8 py-8 relative">
+            {/* Background elements for the premium vibe */}
+            <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
+              <div className="absolute top-[-20%] left-[-10%] h-[500px] w-[500px] rounded-full bg-indigo-500/10 blur-[120px]" />
+              <div className="absolute bottom-[-20%] right-[-10%] h-[500px] w-[500px] rounded-full bg-violet-500/10 blur-[120px]" />
+            </div>
+            {/* Wrapping children so they sit above the effect */}
+            <div className="relative z-10">{children}</div>
           </div>
         </main>
       </div>

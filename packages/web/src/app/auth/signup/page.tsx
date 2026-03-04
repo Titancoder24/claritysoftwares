@@ -22,7 +22,7 @@ export default function SignupPage() {
   const [loading, setLoading] = React.useState(false);
   const [oauthLoading, setOauthLoading] = React.useState<string | null>(null);
   const [error, setError] = React.useState<string | null>(null);
-  const [success, setSuccess] = React.useState(false);
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,7 +43,7 @@ export default function SignupPage() {
 
     try {
       const supabase = createClient();
-      const { error: authError } = await supabase.auth.signUp({
+      const { data, error: authError } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -62,8 +62,10 @@ export default function SignupPage() {
         return;
       }
 
-      setSuccess(true);
-      setLoading(false);
+      if (data?.user) {
+        // Hard-redirect directly to dashboard because email confirmations are OFF
+        window.location.href = "/dashboard";
+      }
     } catch {
       setError("Something went wrong. Please try again.");
       setLoading(false);
@@ -93,31 +95,7 @@ export default function SignupPage() {
     }
   };
 
-  if (success) {
-    return (
-      <Card className="border-zinc-800/50">
-        <CardContent className="p-8 text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10">
-            <Check className="h-6 w-6 text-emerald-400" />
-          </div>
-          <h2 className="text-xl font-semibold text-foreground">
-            Check your email
-          </h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            We sent a confirmation link to your email address. Click it to
-            activate your account.
-          </p>
-          <Link
-            href="/login"
-            className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
-          >
-            Back to sign in
-            <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
-        </CardContent>
-      </Card>
-    );
-  }
+
 
   return (
     <Card className="border-zinc-800/50">
@@ -272,7 +250,7 @@ export default function SignupPage() {
         <p className="mt-6 text-center text-sm text-muted-foreground">
           Already have an account?{" "}
           <Link
-            href="/login"
+            href="/auth/login"
             className="font-medium text-primary hover:underline"
           >
             Sign in

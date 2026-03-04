@@ -38,7 +38,7 @@ export default function LoginPage() {
         return;
       }
 
-      router.push("/");
+      router.push("/dashboard");
       router.refresh();
     } catch {
       setError("Something went wrong. Please try again.");
@@ -187,7 +187,7 @@ export default function LoginPage() {
         <p className="mt-6 text-center text-sm text-muted-foreground">
           Don&apos;t have an account?{" "}
           <Link
-            href="/signup"
+            href="/auth/signup"
             className="font-medium text-primary hover:underline"
           >
             Sign up
