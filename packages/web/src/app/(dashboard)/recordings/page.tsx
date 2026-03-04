@@ -3,11 +3,9 @@
 import * as React from "react";
 import {
   Video,
-  Grid3X3,
-  List,
   Search,
-  Filter,
   Plus,
+  Upload,
   MoreVertical,
   Play,
   Clock,
@@ -17,6 +15,12 @@ import {
   Pencil,
   Copy,
   Download,
+  Share2,
+  ArrowUpDown,
+  ChevronDown,
+  Globe,
+  Loader2,
+  Film,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -30,133 +34,285 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
+
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+type RecordingStatus = "processing" | "completed" | "published";
 
 interface Recording {
   id: string;
   title: string;
-  thumbnail: string;
+  thumbnailColor: string;
   duration: string;
+  durationSeconds: number;
   views: number;
-  status: "ready" | "processing" | "draft";
+  status: RecordingStatus;
   createdAt: string;
   size: string;
 }
 
+// ---------------------------------------------------------------------------
+// Mock data
+// ---------------------------------------------------------------------------
+
 const mockRecordings: Recording[] = [
   {
-    id: "1",
+    id: "rec_01",
     title: "Onboarding Flow Walkthrough",
-    thumbnail: "",
+    thumbnailColor: "from-indigo-600/40 to-violet-700/30",
     duration: "4:32",
-    views: 1240,
-    status: "ready",
-    createdAt: "Mar 1, 2026",
+    durationSeconds: 272,
+    views: 1_243,
+    status: "published",
+    createdAt: "Mar 3, 2026",
     size: "128 MB",
   },
   {
-    id: "2",
-    title: "Dashboard Overview Demo",
-    thumbnail: "",
+    id: "rec_02",
+    title: "Dashboard Overview — Sprint 14 Demo",
+    thumbnailColor: "from-cyan-600/40 to-blue-700/30",
     duration: "2:15",
-    views: 890,
-    status: "ready",
-    createdAt: "Feb 28, 2026",
+    durationSeconds: 135,
+    views: 892,
+    status: "completed",
+    createdAt: "Mar 2, 2026",
     size: "64 MB",
   },
   {
-    id: "3",
-    title: "API Integration Tutorial",
-    thumbnail: "",
+    id: "rec_03",
+    title: "API Integration Tutorial (v2)",
+    thumbnailColor: "from-emerald-600/40 to-teal-700/30",
     duration: "8:47",
-    views: 2100,
-    status: "ready",
-    createdAt: "Feb 25, 2026",
+    durationSeconds: 527,
+    views: 2_104,
+    status: "published",
+    createdAt: "Feb 28, 2026",
     size: "256 MB",
   },
   {
-    id: "4",
-    title: "New Feature Announcement",
-    thumbnail: "",
+    id: "rec_04",
+    title: "New Feature Announcement — Dark Mode",
+    thumbnailColor: "from-amber-600/40 to-orange-700/30",
     duration: "1:30",
+    durationSeconds: 90,
     views: 0,
     status: "processing",
-    createdAt: "Feb 24, 2026",
+    createdAt: "Feb 27, 2026",
     size: "32 MB",
   },
   {
-    id: "5",
-    title: "Customer Support Workflow",
-    thumbnail: "",
+    id: "rec_05",
+    title: "Customer Support Workflow Recording",
+    thumbnailColor: "from-rose-600/40 to-pink-700/30",
     duration: "6:12",
+    durationSeconds: 372,
     views: 456,
-    status: "ready",
-    createdAt: "Feb 22, 2026",
+    status: "published",
+    createdAt: "Feb 25, 2026",
     size: "180 MB",
   },
   {
-    id: "6",
-    title: "Settings Configuration Guide",
-    thumbnail: "",
+    id: "rec_06",
+    title: "Settings & Configuration Guide",
+    thumbnailColor: "from-fuchsia-600/40 to-purple-700/30",
     duration: "3:45",
-    views: 0,
-    status: "draft",
-    createdAt: "Feb 20, 2026",
+    durationSeconds: 225,
+    views: 318,
+    status: "completed",
+    createdAt: "Feb 22, 2026",
     size: "96 MB",
+  },
+  {
+    id: "rec_07",
+    title: "Bug Repro — Table Sorting Issue #482",
+    thumbnailColor: "from-red-600/40 to-rose-700/30",
+    duration: "0:48",
+    durationSeconds: 48,
+    views: 37,
+    status: "completed",
+    createdAt: "Feb 20, 2026",
+    size: "12 MB",
+  },
+  {
+    id: "rec_08",
+    title: "Team Standup — Feb 18",
+    thumbnailColor: "from-sky-600/40 to-indigo-700/30",
+    duration: "12:05",
+    durationSeconds: 725,
+    views: 0,
+    status: "processing",
+    createdAt: "Feb 18, 2026",
+    size: "340 MB",
+  },
+  {
+    id: "rec_09",
+    title: "Product Roadmap Presentation Q1",
+    thumbnailColor: "from-lime-600/40 to-green-700/30",
+    duration: "15:22",
+    durationSeconds: 922,
+    views: 1_589,
+    status: "published",
+    createdAt: "Feb 15, 2026",
+    size: "420 MB",
+  },
+  {
+    id: "rec_10",
+    title: "Design System Components Overview",
+    thumbnailColor: "from-violet-600/40 to-indigo-700/30",
+    duration: "5:10",
+    durationSeconds: 310,
+    views: 671,
+    status: "completed",
+    createdAt: "Feb 12, 2026",
+    size: "148 MB",
   },
 ];
 
-const statusConfig: Record<string, { variant: "success" | "warning" | "secondary"; label: string }> = {
-  ready: { variant: "success", label: "Ready" },
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+const statusConfig: Record<
+  RecordingStatus,
+  { variant: "success" | "warning" | "default" | "secondary"; label: string }
+> = {
+  published: { variant: "success", label: "Published" },
   processing: { variant: "warning", label: "Processing" },
-  draft: { variant: "secondary", label: "Draft" },
+  completed: { variant: "default", label: "Completed" },
 };
 
-function RecordingGridCard({ recording }: { recording: Recording }) {
+type SortOption = "newest" | "oldest" | "most-viewed" | "longest" | "name-az";
+
+const sortOptions: { value: SortOption; label: string }[] = [
+  { value: "newest", label: "Newest first" },
+  { value: "oldest", label: "Oldest first" },
+  { value: "most-viewed", label: "Most viewed" },
+  { value: "longest", label: "Longest" },
+  { value: "name-az", label: "Name A-Z" },
+];
+
+function sortRecordings(recordings: Recording[], sort: SortOption): Recording[] {
+  const sorted = [...recordings];
+  switch (sort) {
+    case "newest":
+      return sorted; // already ordered newest-first in mock data
+    case "oldest":
+      return sorted.reverse();
+    case "most-viewed":
+      return sorted.sort((a, b) => b.views - a.views);
+    case "longest":
+      return sorted.sort((a, b) => b.durationSeconds - a.durationSeconds);
+    case "name-az":
+      return sorted.sort((a, b) => a.title.localeCompare(b.title));
+    default:
+      return sorted;
+  }
+}
+
+function formatViewCount(n: number): string {
+  if (n >= 1_000) return `${(n / 1_000).toFixed(1).replace(/\.0$/, "")}k`;
+  return n.toLocaleString();
+}
+
+// ---------------------------------------------------------------------------
+// Sub-components
+// ---------------------------------------------------------------------------
+
+function RecordingCard({ recording }: { recording: Recording }) {
   const status = statusConfig[recording.status];
+  const isProcessing = recording.status === "processing";
+
   return (
-    <Card className="group overflow-hidden transition-all duration-200 hover:border-zinc-600">
+    <Card
+      className={cn(
+        "group overflow-hidden transition-colors duration-150",
+        "hover:border-zinc-600 cursor-pointer"
+      )}
+    >
       {/* Thumbnail */}
-      <div className="relative aspect-video bg-gradient-to-br from-zinc-900 to-zinc-800">
+      <div className="relative aspect-video overflow-hidden bg-[#0f0f12]">
+        <div
+          className={cn(
+            "absolute inset-0 bg-gradient-to-br",
+            recording.thumbnailColor
+          )}
+        />
+        {/* Grid pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
+
+        {/* Play button overlay */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-            <Play className="h-5 w-5 ml-0.5" />
-          </div>
+          {isProcessing ? (
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 backdrop-blur-sm">
+              <Loader2 className="h-5 w-5 text-amber-400 animate-spin" />
+            </div>
+          ) : (
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur-sm transition-opacity duration-150 group-hover:opacity-100">
+              <Play className="h-4 w-4 ml-0.5 fill-current" />
+            </div>
+          )}
         </div>
-        <div className="absolute bottom-2 right-2 rounded bg-black/80 px-1.5 py-0.5 text-xs font-medium text-white">
+
+        {/* Duration pill */}
+        <div className="absolute bottom-2 right-2 rounded-md bg-black/70 px-1.5 py-0.5 text-[11px] font-medium text-zinc-200 tabular-nums backdrop-blur-sm">
           {recording.duration}
         </div>
+
+        {/* Status badge */}
         <div className="absolute top-2 left-2">
-          <Badge variant={status.variant}>{status.label}</Badge>
+          <Badge variant={status.variant} className="text-[10px] px-1.5 py-0">
+            {status.label}
+          </Badge>
         </div>
       </div>
 
-      <CardContent className="p-4">
+      {/* Card body */}
+      <CardContent className="p-3.5">
         <div className="flex items-start justify-between gap-2">
-          <div className="flex-1 overflow-hidden">
-            <h3 className="truncate text-sm font-medium text-foreground">
+          <div className="min-w-0 flex-1">
+            <h3 className="truncate text-[13px] font-medium text-zinc-100 leading-snug">
               {recording.title}
             </h3>
-            <div className="mt-2 flex items-center gap-3 text-xs text-muted-foreground">
+            <div className="mt-2 flex items-center gap-3 text-[11px] text-zinc-500">
               <span className="flex items-center gap-1">
                 <Calendar className="h-3 w-3" />
                 {recording.createdAt}
               </span>
               <span className="flex items-center gap-1">
                 <Eye className="h-3 w-3" />
-                {recording.views.toLocaleString()}
+                {formatViewCount(recording.views)} views
               </span>
             </div>
           </div>
+
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <button className="rounded-md p-1 text-zinc-500 transition-colors hover:bg-muted hover:text-foreground">
+              <button className="rounded-md p-1 text-zinc-600 transition-colors hover:bg-zinc-800 hover:text-zinc-300">
                 <MoreVertical className="h-4 w-4" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem>
+                <Play className="h-3.5 w-3.5" />
+                Preview
+              </DropdownMenuItem>
+              <DropdownMenuItem>
                 <Pencil className="h-3.5 w-3.5" />
-                Edit
+                Rename
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Share2 className="h-3.5 w-3.5" />
+                Share
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Copy className="h-3.5 w-3.5" />
@@ -179,153 +335,223 @@ function RecordingGridCard({ recording }: { recording: Recording }) {
   );
 }
 
-function RecordingListRow({ recording }: { recording: Recording }) {
-  const status = statusConfig[recording.status];
+function EmptyState({
+  hasSearch,
+  activeTab,
+}: {
+  hasSearch: boolean;
+  activeTab: string;
+}) {
   return (
-    <div className="group flex items-center gap-4 rounded-lg border border-transparent p-3 transition-all hover:border-border hover:bg-muted/30">
-      {/* Thumbnail */}
-      <div className="relative h-16 w-28 shrink-0 overflow-hidden rounded-lg bg-gradient-to-br from-zinc-900 to-zinc-800">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <Play className="h-4 w-4 text-white opacity-0 transition-opacity group-hover:opacity-100" />
-        </div>
-        <div className="absolute bottom-1 right-1 rounded bg-black/80 px-1 py-0.5 text-[10px] font-medium text-white">
-          {recording.duration}
-        </div>
+    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-950/50 py-20 px-6 text-center">
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-800/80 text-zinc-500">
+        <Film className="h-6 w-6" />
       </div>
-
-      <div className="flex-1 overflow-hidden">
-        <h3 className="truncate text-sm font-medium text-foreground">
-          {recording.title}
-        </h3>
-        <div className="mt-1 flex items-center gap-3 text-xs text-muted-foreground">
-          <span className="flex items-center gap-1">
-            <Calendar className="h-3 w-3" />
-            {recording.createdAt}
-          </span>
-          <span>{recording.size}</span>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-        <Eye className="h-3 w-3" />
-        {recording.views.toLocaleString()}
-      </div>
-
-      <Badge variant={status.variant}>{status.label}</Badge>
-
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <button className="rounded-md p-1 text-zinc-500 transition-colors hover:bg-muted hover:text-foreground">
-            <MoreVertical className="h-4 w-4" />
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem>
-            <Pencil className="h-3.5 w-3.5" />
-            Edit
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Copy className="h-3.5 w-3.5" />
-            Duplicate
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Download className="h-3.5 w-3.5" />
-            Download
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem destructive>
-            <Trash2 className="h-3.5 w-3.5" />
-            Delete
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <h3 className="mt-4 text-sm font-medium text-zinc-300">
+        {hasSearch ? "No recordings found" : "No recordings yet"}
+      </h3>
+      <p className="mt-1.5 max-w-sm text-[13px] text-zinc-600">
+        {hasSearch
+          ? `No recordings match your ${activeTab !== "all" ? "filter and " : ""}search query. Try a different search term.`
+          : "Create your first screen recording to get started. It only takes a few seconds."}
+      </p>
+      {!hasSearch && (
+        <Button size="sm" className="mt-5">
+          <Plus className="h-3.5 w-3.5" />
+          New Recording
+        </Button>
+      )}
     </div>
   );
 }
 
+// ---------------------------------------------------------------------------
+// Main page
+// ---------------------------------------------------------------------------
+
 export default function RecordingsPage() {
-  const [view, setView] = React.useState<"grid" | "list">("grid");
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [activeTab, setActiveTab] = React.useState("all");
+  const [sortBy, setSortBy] = React.useState<SortOption>("newest");
+
+  // Filter recordings
+  const filtered = React.useMemo(() => {
+    let results = mockRecordings;
+
+    // Filter by tab
+    if (activeTab !== "all") {
+      results = results.filter((r) => r.status === activeTab);
+    }
+
+    // Filter by search
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      results = results.filter((r) => r.title.toLowerCase().includes(q));
+    }
+
+    // Sort
+    results = sortRecordings(results, sortBy);
+
+    return results;
+  }, [activeTab, searchQuery, sortBy]);
+
+  // Stats
+  const tabCounts = React.useMemo(() => {
+    const counts: Record<string, number> = { all: mockRecordings.length };
+    for (const r of mockRecordings) {
+      counts[r.status] = (counts[r.status] || 0) + 1;
+    }
+    return counts;
+  }, []);
+
+  const totalDuration = React.useMemo(() => {
+    const totalSec = filtered.reduce((sum, r) => sum + r.durationSeconds, 0);
+    const hrs = Math.floor(totalSec / 3600);
+    const mins = Math.floor((totalSec % 3600) / 60);
+    const secs = totalSec % 60;
+    if (hrs > 0) return `${hrs}h ${mins}m`;
+    return `${mins}m ${secs.toString().padStart(2, "0")}s`;
+  }, [filtered]);
+
+  const currentSortLabel =
+    sortOptions.find((o) => o.value === sortBy)?.label ?? "Sort";
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
+      {/* ----------------------------------------------------------------- */}
+      {/* Header                                                            */}
+      {/* ----------------------------------------------------------------- */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground">
+          <h1 className="text-2xl font-semibold tracking-tight text-zinc-50">
             Recordings
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Manage and organize your screen recordings.
+          <p className="mt-1 text-sm text-zinc-500">
+            Capture, edit, and share screen recordings with your team.
           </p>
         </div>
-        <Button size="sm">
-          <Plus className="h-4 w-4" />
-          New Recording
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm">
+            <Upload className="h-3.5 w-3.5" />
+            Import
+          </Button>
+          <Button size="sm">
+            <Plus className="h-3.5 w-3.5" />
+            New Recording
+          </Button>
+        </div>
       </div>
 
-      {/* Toolbar */}
-      <div className="flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3 flex-1">
-          <div className="max-w-sm flex-1">
+      {/* ----------------------------------------------------------------- */}
+      {/* Filter bar                                                        */}
+      {/* ----------------------------------------------------------------- */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        {/* Left: tabs */}
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList>
+            <TabsTrigger value="all">
+              All
+              <span className="ml-1.5 text-[10px] text-zinc-500">
+                {tabCounts.all}
+              </span>
+            </TabsTrigger>
+            <TabsTrigger value="processing">
+              Processing
+              <span className="ml-1.5 text-[10px] text-zinc-500">
+                {tabCounts.processing ?? 0}
+              </span>
+            </TabsTrigger>
+            <TabsTrigger value="completed">
+              Completed
+              <span className="ml-1.5 text-[10px] text-zinc-500">
+                {tabCounts.completed ?? 0}
+              </span>
+            </TabsTrigger>
+            <TabsTrigger value="published">
+              Published
+              <span className="ml-1.5 text-[10px] text-zinc-500">
+                {tabCounts.published ?? 0}
+              </span>
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+
+        {/* Right: search + sort */}
+        <div className="flex items-center gap-2">
+          <div className="w-56">
             <Input
               placeholder="Search recordings..."
-              icon={<Search className="h-4 w-4" />}
+              icon={<Search className="h-3.5 w-3.5" />}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="h-9 text-xs"
             />
           </div>
-          <Tabs defaultValue="all">
-            <TabsList>
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="ready">Ready</TabsTrigger>
-              <TabsTrigger value="processing">Processing</TabsTrigger>
-              <TabsTrigger value="draft">Draft</TabsTrigger>
-            </TabsList>
-          </Tabs>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="icon" className="h-9 w-9">
-            <Filter className="h-4 w-4" />
-          </Button>
-          <div className="flex items-center rounded-lg border border-border">
-            <button
-              onClick={() => setView("grid")}
-              className={`rounded-l-lg p-2 transition-colors ${view === "grid" ? "bg-muted text-foreground" : "text-zinc-500 hover:text-foreground"}`}
-            >
-              <Grid3X3 className="h-4 w-4" />
-            </button>
-            <button
-              onClick={() => setView("list")}
-              className={`rounded-r-lg p-2 transition-colors ${view === "list" ? "bg-muted text-foreground" : "text-zinc-500 hover:text-foreground"}`}
-            >
-              <List className="h-4 w-4" />
-            </button>
-          </div>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Button variant="outline" size="sm" className="gap-1.5 text-zinc-400">
+                <ArrowUpDown className="h-3 w-3" />
+                {currentSortLabel}
+                <ChevronDown className="h-3 w-3 opacity-50" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {sortOptions.map((option) => (
+                <DropdownMenuItem
+                  key={option.value}
+                  onClick={() => setSortBy(option.value)}
+                >
+                  <span
+                    className={cn(
+                      sortBy === option.value
+                        ? "text-zinc-100 font-medium"
+                        : "text-zinc-400"
+                    )}
+                  >
+                    {option.label}
+                  </span>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
 
-      {/* Content */}
-      {view === "grid" ? (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {mockRecordings.map((recording) => (
-            <RecordingGridCard key={recording.id} recording={recording} />
+      {/* ----------------------------------------------------------------- */}
+      {/* Recordings grid                                                   */}
+      {/* ----------------------------------------------------------------- */}
+      {filtered.length > 0 ? (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {filtered.map((recording) => (
+            <RecordingCard key={recording.id} recording={recording} />
           ))}
         </div>
       ) : (
-        <div className="space-y-1">
-          {mockRecordings.map((recording) => (
-            <RecordingListRow key={recording.id} recording={recording} />
-          ))}
-        </div>
+        <EmptyState hasSearch={searchQuery.trim().length > 0} activeTab={activeTab} />
       )}
 
-      {/* Summary */}
-      <div className="flex items-center justify-between border-t border-border pt-4 text-sm text-muted-foreground">
-        <span>{mockRecordings.length} recordings</span>
-        <span className="flex items-center gap-1">
-          <Clock className="h-3.5 w-3.5" />
-          Total duration: 26:51
-        </span>
-      </div>
+      {/* ----------------------------------------------------------------- */}
+      {/* Footer summary                                                    */}
+      {/* ----------------------------------------------------------------- */}
+      {filtered.length > 0 && (
+        <div className="flex items-center justify-between border-t border-zinc-800/60 pt-4 text-xs text-zinc-600">
+          <span>
+            {filtered.length}{" "}
+            {filtered.length === 1 ? "recording" : "recordings"}
+            {activeTab !== "all" && (
+              <span className="text-zinc-700">
+                {" "}
+                of {mockRecordings.length} total
+              </span>
+            )}
+          </span>
+          <span className="flex items-center gap-1.5">
+            <Clock className="h-3 w-3" />
+            Total duration: {totalDuration}
+          </span>
+        </div>
+      )}
     </div>
   );
 }

@@ -48,14 +48,14 @@ function MarketingHeader() {
         {/* Desktop CTA */}
         <div className="hidden items-center gap-3 md:flex">
           <Link
-            href="/auth/login"
+            href="/login"
             className="rounded-lg px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:text-white"
           >
             Sign In
           </Link>
           <Link
-            href="/auth/signup"
-            className="rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-indigo-500/20 transition-all hover:from-indigo-500 hover:to-violet-500 hover:shadow-indigo-500/30"
+            href="/signup"
+            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-500"
           >
             Get Started
           </Link>
@@ -86,14 +86,14 @@ function MarketingHeader() {
             ))}
             <div className="mt-3 flex flex-col gap-2 border-t border-border pt-3">
               <Link
-                href="/auth/login"
+                href="/login"
                 className="text-sm text-zinc-300 hover:text-white"
               >
                 Sign In
               </Link>
               <Link
-                href="/auth/signup"
-                className="rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2 text-center text-sm font-medium text-white"
+                href="/signup"
+                className="rounded-lg bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-indigo-500"
               >
                 Get Started
               </Link>
