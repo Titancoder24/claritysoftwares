@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -30,9 +30,9 @@ export default function RootLayout({
           position="bottom-right"
           toastOptions={{
             style: {
-              background: "#0f0f12",
-              border: "1px solid #27272a",
-              color: "#fafafa",
+              background: "#ffffff",
+              border: "1px solid #e2e8f0",
+              color: "#0f172a",
             },
           }}
         />

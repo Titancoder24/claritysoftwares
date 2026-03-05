@@ -76,7 +76,7 @@ function DropdownMenuContent({
   return (
     <div
       className={cn(
-        "absolute z-50 mt-1 min-w-[180px] rounded-lg border border-border bg-popover p-1 shadow-xl shadow-black/30",
+        "absolute z-50 mt-1 min-w-[180px] rounded-lg border border-border bg-popover p-1 shadow-lg shadow-black/8",
         "animate-in fade-in-0 zoom-in-95",
         align === "end" && "right-0",
         align === "start" && "left-0",

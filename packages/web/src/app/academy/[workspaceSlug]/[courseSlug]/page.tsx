@@ -105,7 +105,7 @@ function CourseSidebar({
   };
 
   return (
-    <div className="flex h-full w-80 flex-col border-r border-border bg-zinc-950/50">
+    <div className="flex h-full w-80 flex-col border-r border-border bg-white">
       {/* Course Info */}
       <div className="border-b border-border p-4">
         <div className="flex items-center gap-2 mb-3">
@@ -120,9 +120,9 @@ function CourseSidebar({
             <span className="text-muted-foreground">Progress</span>
             <span className="font-medium text-foreground">{progress}%</span>
           </div>
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-800">
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-500"
+              className="h-full rounded-full bg-gradient-to-r from-green-500 to-emerald-500 transition-all duration-500"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -140,7 +140,7 @@ function CourseSidebar({
             <div key={module.id} className="mb-1">
               <button
                 onClick={() => toggleModule(module.id)}
-                className="flex w-full items-center gap-2 px-4 py-2.5 text-left transition-colors hover:bg-zinc-800/50"
+                className="flex w-full items-center gap-2 px-4 py-2.5 text-left transition-colors hover:bg-slate-100/50"
               >
                 <ChevronDown
                   className={cn(
@@ -150,7 +150,7 @@ function CourseSidebar({
                 />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-foreground truncate">
-                    <span className="text-xs text-zinc-500 mr-1.5">{moduleIdx + 1}.</span>
+                    <span className="text-xs text-slate-400 mr-1.5">{moduleIdx + 1}.</span>
                     {module.title}
                   </p>
                   <p className="text-[10px] text-muted-foreground mt-0.5">
@@ -177,19 +177,19 @@ function CourseSidebar({
                         className={cn(
                           "flex w-full items-center gap-2.5 px-4 py-2 pl-10 text-left transition-all",
                           isSelected
-                            ? "bg-indigo-500/10 border-l-2 border-indigo-500"
-                            : "border-l-2 border-transparent hover:bg-zinc-800/30",
+                            ? "bg-green-500/10 border-l-2 border-green-500"
+                            : "border-l-2 border-transparent hover:bg-slate-100/30",
                           lesson.locked && "opacity-40 cursor-not-allowed"
                         )}
                       >
                         {lesson.completed ? (
                           <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
                         ) : lesson.locked ? (
-                          <Lock className="h-4 w-4 shrink-0 text-zinc-600" />
+                          <Lock className="h-4 w-4 shrink-0 text-slate-400" />
                         ) : isSelected ? (
-                          <Play className="h-4 w-4 shrink-0 text-indigo-400" />
+                          <Play className="h-4 w-4 shrink-0 text-green-600" />
                         ) : (
-                          <Circle className="h-4 w-4 shrink-0 text-zinc-700" />
+                          <Circle className="h-4 w-4 shrink-0 text-slate-300" />
                         )}
                         <div className="flex-1 min-w-0">
                           <p
@@ -206,7 +206,7 @@ function CourseSidebar({
                         <div className="flex items-center gap-1.5 shrink-0">
                           <Icon className={cn("h-3 w-3", config.color)} />
                           {lesson.duration && (
-                            <span className="text-[10px] text-zinc-600">{lesson.duration}</span>
+                            <span className="text-[10px] text-slate-400">{lesson.duration}</span>
                           )}
                         </div>
                       </button>
@@ -221,8 +221,8 @@ function CourseSidebar({
 
       {/* Certificate CTA */}
       <div className="border-t border-border p-4">
-        <div className="rounded-lg border border-indigo-500/20 bg-indigo-500/5 p-3 text-center">
-          <Award className="mx-auto h-5 w-5 text-indigo-400" />
+        <div className="rounded-lg border border-green-500/20 bg-green-500/5 p-3 text-center">
+          <Award className="mx-auto h-5 w-5 text-green-600" />
           <p className="mt-1.5 text-xs font-medium text-foreground">Earn your certificate</p>
           <p className="mt-0.5 text-[10px] text-muted-foreground">
             Complete all lessons to receive a certificate
@@ -298,7 +298,7 @@ export default function CourseDetailPage({
 
   if (showCertificate) {
     return (
-      <div className="min-h-screen bg-[#09090b]">
+      <div className="min-h-screen bg-[#f5f5f5]">
         <div className="mx-auto max-w-xl px-6 py-12">
           <Button
             variant="ghost"
@@ -325,7 +325,7 @@ export default function CourseDetailPage({
   }
 
   return (
-    <div className="flex h-screen bg-[#09090b]">
+    <div className="flex h-screen bg-[#f5f5f5]">
       {/* Sidebar */}
       <CourseSidebar
         modules={modules}

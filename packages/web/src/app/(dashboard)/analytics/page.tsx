@@ -102,13 +102,13 @@ function StatCard({
     <Card>
       <CardContent className="p-5">
         <div className="flex items-start justify-between">
-          <div className="rounded-lg bg-indigo-500/10 p-2.5">
-            <Icon className="h-5 w-5 text-indigo-400" />
+          <div className="rounded-lg bg-green-500/10 p-2.5">
+            <Icon className="h-5 w-5 text-green-600" />
           </div>
           <div
             className={`flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium ${
               positive
-                ? "bg-emerald-500/10 text-emerald-400"
+                ? "bg-emerald-500/10 text-emerald-600"
                 : "bg-red-500/10 text-red-400"
             }`}
           >
@@ -189,7 +189,7 @@ export default function AnalyticsPage() {
     >
       {label}
       <ArrowUpDown
-        className={`h-3 w-3 transition-colors ${sortKey === field ? "text-indigo-400" : "text-zinc-600 group-hover:text-zinc-400"}`}
+        className={`h-3 w-3 transition-colors ${sortKey === field ? "text-green-600" : "text-slate-400 group-hover:text-slate-500"}`}
       />
     </button>
   );
@@ -304,7 +304,7 @@ export default function AnalyticsPage() {
                     className="group cursor-pointer border-t border-border transition-colors hover:bg-muted/50"
                   >
                     <td className="px-6 py-3.5">
-                      <span className="text-sm font-medium text-foreground group-hover:text-indigo-400 transition-colors">
+                      <span className="text-sm font-medium text-foreground group-hover:text-green-600 transition-colors">
                         {row.title}
                       </span>
                     </td>
@@ -321,7 +321,7 @@ export default function AnalyticsPage() {
                       <div className="flex items-center justify-end gap-2">
                         <div className="h-1.5 w-16 overflow-hidden rounded-full bg-muted">
                           <div
-                            className="h-full rounded-full bg-indigo-500"
+                            className="h-full rounded-full bg-green-500"
                             style={{ width: `${row.completionRate}%` }}
                           />
                         </div>
@@ -331,7 +331,7 @@ export default function AnalyticsPage() {
                       </div>
                     </td>
                     <td className="px-4 py-3.5">
-                      <ChevronRight className="h-4 w-4 text-zinc-600 transition-colors group-hover:text-indigo-400" />
+                      <ChevronRight className="h-4 w-4 text-slate-400 transition-colors group-hover:text-green-600" />
                     </td>
                   </tr>
                 ))}

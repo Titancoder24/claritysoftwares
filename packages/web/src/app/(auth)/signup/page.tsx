@@ -95,10 +95,10 @@ export default function SignupPage() {
 
   if (success) {
     return (
-      <Card className="border-zinc-800/50">
+      <Card className="border-slate-200 bg-white shadow-sm">
         <CardContent className="p-8 text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10">
-            <Check className="h-6 w-6 text-emerald-400" />
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50">
+            <Check className="h-6 w-6 text-emerald-600" />
           </div>
           <h2 className="text-xl font-semibold text-foreground">
             Check your email
@@ -120,7 +120,7 @@ export default function SignupPage() {
   }
 
   return (
-    <Card className="border-zinc-800/50">
+    <Card className="border-slate-200 bg-white shadow-sm">
       <CardContent className="p-8">
         <div className="mb-6 text-center">
           <h2 className="text-xl font-semibold text-foreground">
@@ -132,7 +132,7 @@ export default function SignupPage() {
         </div>
 
         {error && (
-          <div className="mb-4 rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+          <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
             {error}
           </div>
         )}
@@ -262,7 +262,7 @@ export default function SignupPage() {
                 key={feature}
                 className="flex items-center gap-2 text-xs text-muted-foreground"
               >
-                <Check className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                <Check className="h-3.5 w-3.5 shrink-0 text-emerald-600" />
                 {feature}
               </li>
             ))}
@@ -279,13 +279,13 @@ export default function SignupPage() {
           </Link>
         </p>
 
-        <p className="mt-4 text-center text-[11px] text-zinc-600">
+        <p className="mt-4 text-center text-[11px] text-slate-500">
           By signing up, you agree to our{" "}
-          <Link href="/terms" className="underline hover:text-zinc-400">
+          <Link href="/terms" className="underline hover:text-slate-700">
             Terms of Service
           </Link>{" "}
           and{" "}
-          <Link href="/privacy" className="underline hover:text-zinc-400">
+          <Link href="/privacy" className="underline hover:text-slate-700">
             Privacy Policy
           </Link>
           .

@@ -58,24 +58,24 @@ export function ViewsLineChart({ data }: { data: ViewsDataPoint[] }) {
       <AreaChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
         <defs>
           <linearGradient id="viewsGradient" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#6366f1" stopOpacity={0.3} />
-            <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+            <stop offset="0%" stopColor="#16a34a" stopOpacity={0.3} />
+            <stop offset="95%" stopColor="#16a34a" stopOpacity={0} />
           </linearGradient>
         </defs>
         <CartesianGrid
           strokeDasharray="3 3"
-          stroke="#27272a"
+          stroke="#e2e8f0"
           vertical={false}
         />
         <XAxis
           dataKey="date"
-          tick={{ fill: "#71717a", fontSize: 11 }}
+          tick={{ fill: "#64748b", fontSize: 11 }}
           axisLine={false}
           tickLine={false}
           dy={8}
         />
         <YAxis
-          tick={{ fill: "#71717a", fontSize: 11 }}
+          tick={{ fill: "#64748b", fontSize: 11 }}
           axisLine={false}
           tickLine={false}
           dx={-8}
@@ -85,16 +85,16 @@ export function ViewsLineChart({ data }: { data: ViewsDataPoint[] }) {
         />
         <Tooltip
           content={<ChartTooltip valueLabel="Views" />}
-          cursor={{ stroke: "#6366f1", strokeWidth: 1, strokeDasharray: "4 4" }}
+          cursor={{ stroke: "#16a34a", strokeWidth: 1, strokeDasharray: "4 4" }}
         />
         <Area
           type="monotone"
           dataKey="views"
-          stroke="#6366f1"
+          stroke="#16a34a"
           strokeWidth={2}
           fill="url(#viewsGradient)"
           dot={false}
-          activeDot={{ r: 4, fill: "#6366f1", stroke: "#09090b", strokeWidth: 2 }}
+          activeDot={{ r: 4, fill: "#16a34a", stroke: "#ffffff", strokeWidth: 2 }}
         />
       </AreaChart>
     </ResponsiveContainer>
@@ -121,19 +121,19 @@ export function TopContentBarChart({ data }: { data: TopContentDataPoint[] }) {
       >
         <CartesianGrid
           strokeDasharray="3 3"
-          stroke="#27272a"
+          stroke="#e2e8f0"
           horizontal={false}
         />
         <XAxis
           type="number"
-          tick={{ fill: "#71717a", fontSize: 11 }}
+          tick={{ fill: "#64748b", fontSize: 11 }}
           axisLine={false}
           tickLine={false}
         />
         <YAxis
           type="category"
           dataKey="name"
-          tick={{ fill: "#a1a1aa", fontSize: 12 }}
+          tick={{ fill: "#475569", fontSize: 12 }}
           axisLine={false}
           tickLine={false}
           width={140}
@@ -141,12 +141,12 @@ export function TopContentBarChart({ data }: { data: TopContentDataPoint[] }) {
             v.length > 22 ? v.slice(0, 22) + "..." : v
           }
         />
-        <Tooltip content={<ChartTooltip valueLabel="Views" />} cursor={{ fill: "#18181b" }} />
+        <Tooltip content={<ChartTooltip valueLabel="Views" />} cursor={{ fill: "#f1f5f9" }} />
         <Bar dataKey="views" radius={[0, 4, 4, 0]} maxBarSize={28}>
           {data.map((_, i) => (
             <Cell
               key={i}
-              fill={i === 0 ? "#6366f1" : i < 3 ? "#818cf8" : "#4f46e5"}
+              fill={i === 0 ? "#16a34a" : i < 3 ? "#22c55e" : "#15803d"}
               fillOpacity={1 - i * 0.06}
             />
           ))}
@@ -183,18 +183,18 @@ export function EngagementHeatmap({ data }: { data: EngagementSegment[] }) {
             <div
               key={i}
               className="flex-1 transition-colors"
-              style={{ backgroundColor: `rgba(99,102,241,${opacity})` }}
+              style={{ backgroundColor: `rgba(22,163,74,${opacity})` }}
               title={`${Math.floor(seg.second / 60)}:${String(seg.second % 60).padStart(2, "0")} - ${Math.round(seg.intensity * 100)}%`}
             />
           );
         })}
       </div>
       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-        <div className="h-2 w-2 rounded-sm bg-indigo-500/20" />
+        <div className="h-2 w-2 rounded-sm bg-green-500/20" />
         <span>Low</span>
-        <div className="h-2 w-2 rounded-sm bg-indigo-500/60" />
+        <div className="h-2 w-2 rounded-sm bg-green-500/60" />
         <span>Medium</span>
-        <div className="h-2 w-2 rounded-sm bg-indigo-500" />
+        <div className="h-2 w-2 rounded-sm bg-green-500" />
         <span>High</span>
       </div>
     </div>
@@ -240,10 +240,10 @@ export function CompletionFunnel({ data }: { data: FunnelStep[] }) {
                   width: `${pct}%`,
                   background:
                     i === 0
-                      ? "#6366f1"
+                      ? "#16a34a"
                       : i === data.length - 1
-                        ? "#8b5cf6"
-                        : `linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%)`,
+                        ? "#059669"
+                        : `linear-gradient(90deg, #16a34a 0%, #059669 100%)`,
                 }}
               />
             </div>

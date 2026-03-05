@@ -414,7 +414,7 @@ export function useVideoRenderer({
       ctx.closePath();
       ctx.fillStyle = "#ffffff";
       ctx.fill();
-      ctx.strokeStyle = "#09090b";
+      ctx.strokeStyle = "#e2e8f0";
       ctx.lineWidth = 1.5;
       ctx.stroke();
       ctx.restore();

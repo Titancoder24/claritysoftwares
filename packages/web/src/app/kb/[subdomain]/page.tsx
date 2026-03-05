@@ -126,19 +126,19 @@ function CategoryCard({ category, subdomain }: { category: Category; subdomain: 
   const Icon = iconMap[category.icon] || BookOpen;
 
   return (
-    <div className="group rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-6 transition-all duration-200 hover:border-zinc-700 hover:bg-zinc-900/60">
+    <div className="group rounded-xl border border-slate-200 bg-white p-6 transition-all duration-200 hover:border-slate-300 hover:bg-slate-50">
       <div className="flex items-start gap-4">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 transition-colors group-hover:bg-indigo-500/15">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-green-500/10 text-green-600 transition-colors group-hover:bg-green-500/15">
           <Icon className="h-5 w-5" />
         </div>
         <div className="min-w-0 flex-1">
           <a
             href={`/kb/${subdomain}/${category.slug}`}
-            className="text-base font-semibold text-white transition-colors group-hover:text-indigo-400"
+            className="text-base font-semibold text-slate-900 transition-colors group-hover:text-green-600"
           >
             {category.name}
           </a>
-          <p className="mt-1 text-sm leading-relaxed text-zinc-500">
+          <p className="mt-1 text-sm leading-relaxed text-slate-500">
             {category.description}
           </p>
 
@@ -147,9 +147,9 @@ function CategoryCard({ category, subdomain }: { category: Category; subdomain: 
               <li key={child.id}>
                 <a
                   href={`/kb/${subdomain}/${category.slug}/${child.slug}`}
-                  className="flex items-center gap-2 text-sm text-zinc-400 transition-colors hover:text-indigo-400"
+                  className="flex items-center gap-2 text-sm text-slate-500 transition-colors hover:text-green-600"
                 >
-                  <ChevronRight className="h-3 w-3 text-zinc-600" />
+                  <ChevronRight className="h-3 w-3 text-slate-400" />
                   {child.name}
                 </a>
               </li>
@@ -158,7 +158,7 @@ function CategoryCard({ category, subdomain }: { category: Category; subdomain: 
               <li>
                 <a
                   href={`/kb/${subdomain}/${category.slug}`}
-                  className="flex items-center gap-1 text-xs font-medium text-indigo-400/70 transition-colors hover:text-indigo-400"
+                  className="flex items-center gap-1 text-xs font-medium text-green-600/70 transition-colors hover:text-green-600"
                 >
                   View all {category.pageCount} articles
                   <ArrowRight className="h-3 w-3" />
@@ -175,7 +175,7 @@ function CategoryCard({ category, subdomain }: { category: Category; subdomain: 
 function Sidebar({ categories: cats, subdomain }: { categories: Category[]; subdomain: string }) {
   return (
     <nav className="space-y-1">
-      <div className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-widest text-zinc-600">
+      <div className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">
         Categories
       </div>
       {cats.map((cat) => {
@@ -184,11 +184,11 @@ function Sidebar({ categories: cats, subdomain }: { categories: Category[]; subd
           <a
             key={cat.id}
             href={`/kb/${subdomain}/${cat.slug}`}
-            className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-zinc-400 transition-colors hover:bg-zinc-800/50 hover:text-zinc-200"
+            className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
           >
-            <Icon className="h-4 w-4 text-zinc-600" />
+            <Icon className="h-4 w-4 text-slate-400" />
             <span>{cat.name}</span>
-            <span className="ml-auto text-[10px] tabular-nums text-zinc-700">
+            <span className="ml-auto text-[10px] tabular-nums text-slate-300">
               {cat.pageCount}
             </span>
           </a>
@@ -206,26 +206,26 @@ export default async function PublicKBHomePage({
   const { subdomain } = await params;
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-white">
+    <div className="min-h-screen bg-[#f5f5f5] text-slate-900">
       {/* Header */}
-      <header className="border-b border-zinc-800/80">
+      <header className="border-b border-slate-200">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
           <div className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500">
-              <BookOpen className="h-4 w-4 text-white" />
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-green-500 to-emerald-500">
+              <BookOpen className="h-4 w-4 text-slate-900" />
             </div>
-            <span className="text-sm font-semibold text-white">ScreenFlow Docs</span>
+            <span className="text-sm font-semibold text-slate-900">ScreenFlow Docs</span>
           </div>
           <div className="flex items-center gap-4">
-            <a href="#" className="text-sm text-zinc-400 transition-colors hover:text-white">
+            <a href="#" className="text-sm text-slate-500 transition-colors hover:text-slate-800">
               API Reference
             </a>
-            <a href="#" className="text-sm text-zinc-400 transition-colors hover:text-white">
+            <a href="#" className="text-sm text-slate-500 transition-colors hover:text-slate-800">
               Changelog
             </a>
             <a
               href="#"
-              className="flex items-center gap-1.5 text-sm text-zinc-400 transition-colors hover:text-white"
+              className="flex items-center gap-1.5 text-sm text-slate-500 transition-colors hover:text-slate-800"
             >
               Visit ScreenFlow
               <ExternalLink className="h-3 w-3" />
@@ -235,13 +235,13 @@ export default async function PublicKBHomePage({
       </header>
 
       {/* Hero */}
-      <section className="relative border-b border-zinc-800/50">
-        <div className="absolute inset-0 bg-gradient-to-b from-indigo-950/10 to-transparent" />
+      <section className="relative border-b border-slate-200">
+        <div className="absolute inset-0 bg-gradient-to-b from-green-50/50 to-transparent" />
         <div className="relative mx-auto max-w-7xl px-6 py-16 text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-white">
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900">
             How can we help you?
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-base text-zinc-400">
+          <p className="mx-auto mt-3 max-w-xl text-base text-slate-500">
             Search our knowledge base or browse categories below to find answers,
             guides, and tutorials.
           </p>
@@ -249,13 +249,13 @@ export default async function PublicKBHomePage({
           {/* Search */}
           <div className="mx-auto mt-8 max-w-xl">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-zinc-500" />
+              <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
               <input
                 type="text"
                 placeholder="Search documentation..."
-                className="h-14 w-full rounded-xl border border-zinc-800 bg-zinc-900/80 pl-12 pr-4 text-base text-white placeholder:text-zinc-600 transition-all focus:border-indigo-500/50 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                className="h-14 w-full rounded-xl border border-slate-200 bg-white pl-12 pr-4 text-base text-slate-900 placeholder:text-slate-400/70 transition-all focus:border-green-500/50 focus:outline-none focus:ring-2 focus:ring-green-500/20"
               />
-              <kbd className="absolute right-4 top-1/2 -translate-y-1/2 rounded-md border border-zinc-700 bg-zinc-800 px-2 py-0.5 text-[10px] font-medium text-zinc-500">
+              <kbd className="absolute right-4 top-1/2 -translate-y-1/2 rounded-md border border-zinc-700 bg-zinc-800 px-2 py-0.5 text-[10px] font-medium text-slate-500">
                 /
               </kbd>
             </div>
@@ -283,21 +283,21 @@ export default async function PublicKBHomePage({
 
           {/* Popular Articles */}
           <section className="mt-12">
-            <h2 className="mb-4 text-lg font-semibold text-white">Popular Articles</h2>
-            <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/20 divide-y divide-zinc-800/50">
+            <h2 className="mb-4 text-lg font-semibold text-slate-900">Popular Articles</h2>
+            <div className="rounded-xl border border-slate-200 bg-white divide-y divide-zinc-800/50">
               {popularArticles.map((article) => (
                 <a
                   key={article.slug}
                   href={`/kb/${subdomain}/${article.slug}`}
-                  className="flex items-center justify-between px-5 py-3.5 transition-colors hover:bg-zinc-800/30"
+                  className="flex items-center justify-between px-5 py-3.5 transition-colors hover:bg-slate-100"
                 >
                   <div className="flex items-center gap-3">
-                    <FileText className="h-4 w-4 text-zinc-600" />
-                    <span className="text-sm text-zinc-300">{article.title}</span>
+                    <FileText className="h-4 w-4 text-slate-400" />
+                    <span className="text-sm text-slate-700">{article.title}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-zinc-600">{article.category}</span>
-                    <ChevronRight className="h-3.5 w-3.5 text-zinc-700" />
+                    <span className="text-xs text-slate-400">{article.category}</span>
+                    <ChevronRight className="h-3.5 w-3.5 text-slate-300" />
                   </div>
                 </a>
               ))}
@@ -307,18 +307,18 @@ export default async function PublicKBHomePage({
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-800/50">
+      <footer className="border-t border-slate-200">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-          <div className="flex items-center gap-2 text-xs text-zinc-600">
-            <div className="flex h-5 w-5 items-center justify-center rounded bg-gradient-to-br from-indigo-500 to-violet-500">
-              <BookOpen className="h-3 w-3 text-white" />
+          <div className="flex items-center gap-2 text-xs text-slate-400">
+            <div className="flex h-5 w-5 items-center justify-center rounded bg-gradient-to-br from-green-500 to-emerald-500">
+              <BookOpen className="h-3 w-3 text-slate-900" />
             </div>
             Powered by ScreenFlow
           </div>
-          <div className="flex items-center gap-4 text-xs text-zinc-600">
-            <a href="#" className="transition-colors hover:text-zinc-400">Status</a>
-            <a href="#" className="transition-colors hover:text-zinc-400">Privacy</a>
-            <a href="#" className="transition-colors hover:text-zinc-400">Terms</a>
+          <div className="flex items-center gap-4 text-xs text-slate-400">
+            <a href="#" className="transition-colors hover:text-slate-600">Status</a>
+            <a href="#" className="transition-colors hover:text-slate-600">Privacy</a>
+            <a href="#" className="transition-colors hover:text-slate-600">Terms</a>
           </div>
         </div>
       </footer>

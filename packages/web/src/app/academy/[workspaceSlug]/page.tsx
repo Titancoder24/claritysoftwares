@@ -149,9 +149,9 @@ const LEVEL_COLORS: Record<string, string> = {
 };
 
 const GRADIENT_MAP: Record<number, string> = {
-  0: "from-indigo-600 to-violet-600",
+  0: "from-green-600 to-emerald-600",
   1: "from-violet-600 to-purple-600",
-  2: "from-blue-600 to-indigo-600",
+  2: "from-blue-600 to-green-600",
   3: "from-emerald-600 to-teal-600",
   4: "from-amber-600 to-orange-600",
   5: "from-pink-600 to-rose-600",
@@ -163,7 +163,7 @@ function CourseCard({ course, workspaceSlug }: { course: PublicCourse; workspace
   return (
     <a
       href={`/academy/${workspaceSlug}/${course.slug}`}
-      className="group flex flex-col rounded-xl border border-border bg-card transition-all duration-200 hover:border-zinc-700 hover:shadow-lg hover:shadow-black/20"
+      className="group flex flex-col rounded-xl border border-border bg-card transition-all duration-200 hover:border-slate-200 hover:shadow-lg hover:shadow-slate-200/60"
     >
       {/* Thumbnail */}
       <div
@@ -201,7 +201,7 @@ function CourseCard({ course, workspaceSlug }: { course: PublicCourse; workspace
       {/* Content */}
       <div className="flex flex-1 flex-col p-5">
         <div className="mb-2 flex items-center gap-2">
-          <span className="text-[10px] font-medium uppercase tracking-wider text-indigo-400">
+          <span className="text-[10px] font-medium uppercase tracking-wider text-green-600">
             {course.category}
           </span>
           <div className="flex items-center gap-1">
@@ -210,7 +210,7 @@ function CourseCard({ course, workspaceSlug }: { course: PublicCourse; workspace
           </div>
         </div>
 
-        <h3 className="mb-1.5 text-[15px] font-semibold text-foreground leading-snug group-hover:text-indigo-400 transition-colors">
+        <h3 className="mb-1.5 text-[15px] font-semibold text-foreground leading-snug group-hover:text-green-600 transition-colors">
           {course.title}
         </h3>
         <p className="mb-4 text-sm text-muted-foreground line-clamp-2 leading-relaxed">
@@ -237,12 +237,12 @@ function CourseCard({ course, workspaceSlug }: { course: PublicCourse; workspace
       <div className="border-t border-border px-5 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-[10px] font-bold text-white">
+            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-green-600 to-emerald-600 text-[10px] font-bold text-white">
               {course.instructor.name.charAt(0)}
             </div>
             <span className="text-xs text-muted-foreground">{course.instructor.name}</span>
           </div>
-          <span className="flex items-center gap-1 text-xs font-medium text-indigo-400 opacity-0 transition-opacity group-hover:opacity-100">
+          <span className="flex items-center gap-1 text-xs font-medium text-green-600 opacity-0 transition-opacity group-hover:opacity-100">
             Enroll <ArrowRight className="h-3 w-3" />
           </span>
         </div>
@@ -274,13 +274,13 @@ export default function PublicAcademyCatalogPage({
   });
 
   return (
-    <div className="min-h-screen bg-[#09090b]">
+    <div className="min-h-screen bg-[#f5f5f5]">
       {/* Header */}
       <header className="border-b border-border">
         <div className="mx-auto max-w-7xl px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-green-600 to-emerald-600">
                 <GraduationCap className="h-5 w-5 text-white" />
               </div>
               <div>
@@ -309,7 +309,7 @@ export default function PublicAcademyCatalogPage({
           <Badge className="mb-4">{MOCK_COURSES.length} Courses Available</Badge>
           <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
             Master ScreenFlow.{" "}
-            <span className="bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
               Learn Everything.
             </span>
           </h2>
@@ -340,8 +340,8 @@ export default function PublicAcademyCatalogPage({
                   className={cn(
                     "whitespace-nowrap rounded-lg px-3.5 py-1.5 text-sm font-medium transition-all",
                     activeCategory === cat
-                      ? "bg-zinc-800 text-foreground"
-                      : "text-muted-foreground hover:text-foreground hover:bg-zinc-800/50"
+                      ? "bg-slate-100 text-foreground"
+                      : "text-muted-foreground hover:text-foreground hover:bg-slate-100/50"
                   )}
                 >
                   {cat}
@@ -356,8 +356,8 @@ export default function PublicAcademyCatalogPage({
                   className={cn(
                     "rounded-md border px-2.5 py-1 text-xs font-medium transition-all",
                     levelFilter === level
-                      ? "border-indigo-500/30 bg-indigo-500/10 text-indigo-400"
-                      : "border-border text-muted-foreground hover:text-foreground hover:border-zinc-600"
+                      ? "border-green-500/30 bg-green-500/10 text-green-600"
+                      : "border-border text-muted-foreground hover:text-foreground hover:border-slate-300"
                   )}
                 >
                   {level}
@@ -385,7 +385,7 @@ export default function PublicAcademyCatalogPage({
           </>
         ) : (
           <div className="flex flex-col items-center justify-center py-20">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-zinc-800">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-100">
               <Search className="h-8 w-8 text-muted-foreground" />
             </div>
             <h3 className="mt-4 text-base font-medium text-foreground">No courses found</h3>
@@ -415,7 +415,7 @@ export default function PublicAcademyCatalogPage({
               <GraduationCap className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm text-muted-foreground">ScreenFlow Academy</span>
             </div>
-            <p className="text-xs text-zinc-600">
+            <p className="text-xs text-slate-400">
               Powered by ScreenFlow
             </p>
           </div>

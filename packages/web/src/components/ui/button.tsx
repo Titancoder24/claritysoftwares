@@ -5,20 +5,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 cursor-pointer select-none",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 cursor-pointer select-none",
   {
     variants: {
       variant: {
         default:
-          "bg-indigo-600 text-white hover:bg-indigo-500 active:bg-indigo-700",
+          "bg-green-800 text-white hover:bg-green-700",
         secondary:
-          "bg-secondary text-secondary-foreground border border-border hover:bg-zinc-800 hover:border-zinc-600",
+          "bg-secondary text-secondary-foreground border border-border hover:bg-slate-200",
         outline:
-          "border border-border bg-transparent text-foreground hover:bg-muted hover:border-zinc-600",
+          "border border-border bg-white text-foreground hover:bg-slate-50",
         ghost:
-          "text-muted-foreground hover:text-foreground hover:bg-muted",
+          "text-muted-foreground hover:text-foreground hover:bg-slate-100",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-red-600 active:bg-red-700",
+          "bg-destructive text-destructive-foreground hover:bg-red-600",
         link: "text-primary underline-offset-4 hover:underline p-0 h-auto",
       },
       size: {

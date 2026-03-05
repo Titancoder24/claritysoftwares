@@ -155,7 +155,7 @@ function SidebarNav({
             <a
               href={`/kb/${subdomain}/${cat.slug}`}
               className={`flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors ${
-                isActiveCategory ? "text-indigo-400" : "text-zinc-500 hover:text-zinc-300"
+                isActiveCategory ? "text-green-600" : "text-slate-400 hover:text-slate-700"
               }`}
             >
               <Icon className="h-3.5 w-3.5" />
@@ -170,8 +170,8 @@ function SidebarNav({
                     href={`/kb/${subdomain}/${page.slug}`}
                     className={`block rounded-md px-3 py-1.5 text-sm transition-colors ${
                       isActive
-                        ? "bg-indigo-500/10 text-indigo-400 font-medium"
-                        : "text-zinc-500 hover:bg-zinc-800/40 hover:text-zinc-300"
+                        ? "bg-indigo-500/10 text-green-600 font-medium"
+                        : "text-slate-400 hover:bg-slate-100 hover:text-slate-700"
                     }`}
                   >
                     {page.title}
@@ -193,15 +193,15 @@ function SidebarNav({
 function TableOfContents({ items }: { items: TOCItem[] }) {
   return (
     <div className="space-y-1">
-      <div className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-zinc-600">
+      <div className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">
         On this page
       </div>
       {items.map((item) => (
         <a
           key={item.id}
           href={`#${item.id}`}
-          className={`block rounded-md py-1 text-xs transition-colors hover:text-zinc-200 ${
-            item.level === 3 ? "pl-4 text-zinc-600" : "pl-0 text-zinc-400"
+          className={`block rounded-md py-1 text-xs transition-colors hover:text-slate-900 ${
+            item.level === 3 ? "pl-4 text-slate-400" : "pl-0 text-slate-500"
           }`}
         >
           {item.title}
@@ -218,23 +218,23 @@ function TableOfContents({ items }: { items: TOCItem[] }) {
 function ArticleContent() {
   return (
     <div className="prose-custom">
-      <h2 id="overview" className="mb-4 mt-0 text-xl font-semibold text-white">
+      <h2 id="overview" className="mb-4 mt-0 text-xl font-semibold text-slate-900">
         Overview
       </h2>
-      <p className="mb-6 leading-relaxed text-zinc-400">
+      <p className="mb-6 leading-relaxed text-slate-500">
         This guide will walk you through the complete setup process for ScreenFlow.
         By the end of this guide, you will have the extension installed, configured
         to your preferences, and be ready to create your first screen recording.
       </p>
 
-      <div className="mb-6 rounded-xl border border-indigo-500/20 bg-indigo-500/5 p-4">
+      <div className="mb-6 rounded-xl border border-green-500/20 bg-green-500/5 p-4">
         <div className="flex gap-3">
-          <Zap className="mt-0.5 h-4 w-4 shrink-0 text-indigo-400" />
+          <Zap className="mt-0.5 h-4 w-4 shrink-0 text-green-600" />
           <div>
-            <div className="text-sm font-medium text-indigo-300">Quick Tip</div>
-            <p className="mt-1 text-sm text-zinc-400">
+            <div className="text-sm font-medium text-green-700">Quick Tip</div>
+            <p className="mt-1 text-sm text-slate-500">
               If you have already installed the extension, you can skip directly to{" "}
-              <a href="#step-2" className="text-indigo-400 underline underline-offset-2">
+              <a href="#step-2" className="text-green-600 underline underline-offset-2">
                 Step 2: Configure settings
               </a>
               .
@@ -243,53 +243,53 @@ function ArticleContent() {
         </div>
       </div>
 
-      <h2 id="prerequisites" className="mb-4 mt-10 text-xl font-semibold text-white">
+      <h2 id="prerequisites" className="mb-4 mt-10 text-xl font-semibold text-slate-900">
         Prerequisites
       </h2>
-      <ul className="mb-6 space-y-2 text-zinc-400">
+      <ul className="mb-6 space-y-2 text-slate-500">
         <li className="flex items-start gap-2.5">
-          <ChevronRight className="mt-1 h-3.5 w-3.5 shrink-0 text-indigo-400/50" />
+          <ChevronRight className="mt-1 h-3.5 w-3.5 shrink-0 text-green-600/50" />
           <span>A modern web browser (Chrome 90+, Firefox 88+, or Edge 90+)</span>
         </li>
         <li className="flex items-start gap-2.5">
-          <ChevronRight className="mt-1 h-3.5 w-3.5 shrink-0 text-indigo-400/50" />
+          <ChevronRight className="mt-1 h-3.5 w-3.5 shrink-0 text-green-600/50" />
           <span>A ScreenFlow account (free tier available)</span>
         </li>
         <li className="flex items-start gap-2.5">
-          <ChevronRight className="mt-1 h-3.5 w-3.5 shrink-0 text-indigo-400/50" />
+          <ChevronRight className="mt-1 h-3.5 w-3.5 shrink-0 text-green-600/50" />
           <span>Microphone access (optional, for audio recording)</span>
         </li>
       </ul>
 
-      <h2 id="step-1" className="mb-4 mt-10 text-xl font-semibold text-white">
+      <h2 id="step-1" className="mb-4 mt-10 text-xl font-semibold text-slate-900">
         Step 1: Install the Extension
       </h2>
-      <p className="mb-4 leading-relaxed text-zinc-400">
+      <p className="mb-4 leading-relaxed text-slate-500">
         Visit the Chrome Web Store and search for &quot;ScreenFlow&quot; or click the direct
         installation link below. Click the &quot;Add to Chrome&quot; button to install the
         extension.
       </p>
 
       {/* Mock code block */}
-      <div className="mb-6 overflow-hidden rounded-lg border border-zinc-800">
-        <div className="flex items-center justify-between border-b border-zinc-800 bg-zinc-900/50 px-4 py-2">
-          <span className="text-xs text-zinc-500">Terminal</span>
-          <button className="text-[10px] text-zinc-600 transition-colors hover:text-zinc-400">
+      <div className="mb-6 overflow-hidden rounded-lg border border-slate-200">
+        <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-2">
+          <span className="text-xs text-slate-400">Terminal</span>
+          <button className="text-[10px] text-slate-400 transition-colors hover:text-slate-500">
             Copy
           </button>
         </div>
-        <pre className="overflow-x-auto bg-zinc-950 px-4 py-3">
-          <code className="text-sm text-zinc-300">
-            <span className="text-zinc-500">$</span>{" "}
+        <pre className="overflow-x-auto bg-slate-50 px-4 py-3">
+          <code className="text-sm text-slate-700">
+            <span className="text-slate-400">$</span>{" "}
             <span className="text-emerald-400">npm</span> install @screenflow/sdk
           </code>
         </pre>
       </div>
 
-      <h2 id="step-2" className="mb-4 mt-10 text-xl font-semibold text-white">
+      <h2 id="step-2" className="mb-4 mt-10 text-xl font-semibold text-slate-900">
         Step 2: Configure Settings
       </h2>
-      <p className="mb-4 leading-relaxed text-zinc-400">
+      <p className="mb-4 leading-relaxed text-slate-500">
         After installation, click the ScreenFlow icon in your browser toolbar to open
         the settings panel. Here you can configure recording quality, audio sources,
         and keyboard shortcuts.
@@ -297,53 +297,53 @@ function ArticleContent() {
 
       <h3
         id="configuration-options"
-        className="mb-3 mt-8 text-lg font-semibold text-zinc-200"
+        className="mb-3 mt-8 text-lg font-semibold text-slate-800"
       >
         Configuration Options
       </h3>
 
       {/* Mock table */}
-      <div className="mb-6 overflow-hidden rounded-lg border border-zinc-800">
+      <div className="mb-6 overflow-hidden rounded-lg border border-slate-200">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-zinc-800 bg-zinc-900/50">
-              <th className="px-4 py-2.5 text-left text-xs font-semibold text-zinc-400">
+            <tr className="border-b border-slate-200 bg-slate-50">
+              <th className="px-4 py-2.5 text-left text-xs font-semibold text-slate-500">
                 Option
               </th>
-              <th className="px-4 py-2.5 text-left text-xs font-semibold text-zinc-400">
+              <th className="px-4 py-2.5 text-left text-xs font-semibold text-slate-500">
                 Default
               </th>
-              <th className="px-4 py-2.5 text-left text-xs font-semibold text-zinc-400">
+              <th className="px-4 py-2.5 text-left text-xs font-semibold text-slate-500">
                 Description
               </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-800/50">
             <tr>
-              <td className="px-4 py-2.5 font-mono text-xs text-indigo-400">quality</td>
-              <td className="px-4 py-2.5 text-xs text-zinc-500">1080p</td>
-              <td className="px-4 py-2.5 text-xs text-zinc-400">
+              <td className="px-4 py-2.5 font-mono text-xs text-green-600">quality</td>
+              <td className="px-4 py-2.5 text-xs text-slate-400">1080p</td>
+              <td className="px-4 py-2.5 text-xs text-slate-500">
                 Recording resolution (720p, 1080p, 4K)
               </td>
             </tr>
             <tr>
-              <td className="px-4 py-2.5 font-mono text-xs text-indigo-400">fps</td>
-              <td className="px-4 py-2.5 text-xs text-zinc-500">30</td>
-              <td className="px-4 py-2.5 text-xs text-zinc-400">
+              <td className="px-4 py-2.5 font-mono text-xs text-green-600">fps</td>
+              <td className="px-4 py-2.5 text-xs text-slate-400">30</td>
+              <td className="px-4 py-2.5 text-xs text-slate-500">
                 Frames per second (24, 30, 60)
               </td>
             </tr>
             <tr>
-              <td className="px-4 py-2.5 font-mono text-xs text-indigo-400">audio</td>
-              <td className="px-4 py-2.5 text-xs text-zinc-500">true</td>
-              <td className="px-4 py-2.5 text-xs text-zinc-400">
+              <td className="px-4 py-2.5 font-mono text-xs text-green-600">audio</td>
+              <td className="px-4 py-2.5 text-xs text-slate-400">true</td>
+              <td className="px-4 py-2.5 text-xs text-slate-500">
                 Enable microphone recording
               </td>
             </tr>
             <tr>
-              <td className="px-4 py-2.5 font-mono text-xs text-indigo-400">systemAudio</td>
-              <td className="px-4 py-2.5 text-xs text-zinc-500">false</td>
-              <td className="px-4 py-2.5 text-xs text-zinc-400">
+              <td className="px-4 py-2.5 font-mono text-xs text-green-600">systemAudio</td>
+              <td className="px-4 py-2.5 text-xs text-slate-400">false</td>
+              <td className="px-4 py-2.5 text-xs text-slate-500">
                 Capture system/tab audio
               </td>
             </tr>
@@ -351,16 +351,16 @@ function ArticleContent() {
         </table>
       </div>
 
-      <h2 id="step-3" className="mb-4 mt-10 text-xl font-semibold text-white">
+      <h2 id="step-3" className="mb-4 mt-10 text-xl font-semibold text-slate-900">
         Step 3: Start Recording
       </h2>
-      <p className="mb-4 leading-relaxed text-zinc-400">
+      <p className="mb-4 leading-relaxed text-slate-500">
         Click the record button or use the keyboard shortcut to begin capturing your
         screen. You can choose to record the entire screen, a specific window, or a
         custom area.
       </p>
 
-      <h3 id="keyboard-shortcuts" className="mb-3 mt-8 text-lg font-semibold text-zinc-200">
+      <h3 id="keyboard-shortcuts" className="mb-3 mt-8 text-lg font-semibold text-slate-800">
         Keyboard Shortcuts
       </h3>
       <div className="mb-6 space-y-2">
@@ -371,20 +371,20 @@ function ArticleContent() {
         ].map((shortcut) => (
           <div
             key={shortcut.keys}
-            className="flex items-center justify-between rounded-lg border border-zinc-800/50 bg-zinc-900/30 px-4 py-2.5"
+            className="flex items-center justify-between rounded-lg border border-slate-200 bg-white/30 px-4 py-2.5"
           >
-            <span className="text-sm text-zinc-400">{shortcut.desc}</span>
-            <kbd className="rounded-md border border-zinc-700 bg-zinc-800 px-2.5 py-1 font-mono text-xs text-zinc-300">
+            <span className="text-sm text-slate-500">{shortcut.desc}</span>
+            <kbd className="rounded-md border border-slate-200 bg-slate-100 px-2.5 py-1 font-mono text-xs text-slate-700">
               {shortcut.keys}
             </kbd>
           </div>
         ))}
       </div>
 
-      <h2 id="troubleshooting" className="mb-4 mt-10 text-xl font-semibold text-white">
+      <h2 id="troubleshooting" className="mb-4 mt-10 text-xl font-semibold text-slate-900">
         Troubleshooting
       </h2>
-      <p className="mb-4 leading-relaxed text-zinc-400">
+      <p className="mb-4 leading-relaxed text-slate-500">
         If you encounter issues during setup, try the following solutions:
       </p>
       <div className="mb-6 space-y-3">
@@ -404,22 +404,22 @@ function ArticleContent() {
         ].map((item) => (
           <details
             key={item.q}
-            className="group rounded-lg border border-zinc-800/50 bg-zinc-900/20"
+            className="group rounded-lg border border-slate-200 bg-white/20"
           >
-            <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-zinc-300 transition-colors hover:text-white">
+            <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-slate-700 transition-colors hover:text-slate-900">
               {item.q}
             </summary>
-            <p className="border-t border-zinc-800/30 px-4 py-3 text-sm text-zinc-500">
+            <p className="border-t border-slate-200/30 px-4 py-3 text-sm text-slate-400">
               {item.a}
             </p>
           </details>
         ))}
       </div>
 
-      <h2 id="next-steps" className="mb-4 mt-10 text-xl font-semibold text-white">
+      <h2 id="next-steps" className="mb-4 mt-10 text-xl font-semibold text-slate-900">
         Next Steps
       </h2>
-      <p className="mb-4 leading-relaxed text-zinc-400">
+      <p className="mb-4 leading-relaxed text-slate-500">
         Now that you have ScreenFlow set up, explore these guides to make the most of
         your recordings:
       </p>
@@ -431,14 +431,14 @@ function ArticleContent() {
           <a
             key={card.title}
             href="#"
-            className="flex items-center gap-3 rounded-lg border border-zinc-800/50 bg-zinc-900/20 p-4 transition-all hover:border-zinc-700 hover:bg-zinc-900/40"
+            className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white/20 p-4 transition-all hover:border-slate-300 hover:bg-white/40"
           >
-            <card.icon className="h-5 w-5 text-indigo-400" />
+            <card.icon className="h-5 w-5 text-green-600" />
             <div>
-              <div className="text-sm font-medium text-zinc-200">{card.title}</div>
-              <div className="text-xs text-zinc-600">Read guide</div>
+              <div className="text-sm font-medium text-slate-800">{card.title}</div>
+              <div className="text-xs text-slate-400">Read guide</div>
             </div>
-            <ArrowRight className="ml-auto h-4 w-4 text-zinc-700" />
+            <ArrowRight className="ml-auto h-4 w-4 text-slate-300" />
           </a>
         ))}
       </div>
@@ -470,27 +470,27 @@ export default async function PublicKBPage({
   };
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-white">
+    <div className="min-h-screen bg-[#f5f5f5] text-slate-900">
       {/* Header */}
-      <header className="border-b border-zinc-800/80">
+      <header className="border-b border-slate-200">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
           <div className="flex items-center gap-3">
             <a href={`/kb/${subdomain}`} className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500">
-                <BookOpen className="h-4 w-4 text-white" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-green-500 to-emerald-500">
+                <BookOpen className="h-4 w-4 text-slate-900" />
               </div>
-              <span className="text-sm font-semibold text-white">ScreenFlow Docs</span>
+              <span className="text-sm font-semibold text-slate-900">ScreenFlow Docs</span>
             </a>
           </div>
           <div className="flex items-center gap-3">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-600" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
               <input
                 type="text"
                 placeholder="Search..."
-                className="h-9 w-56 rounded-lg border border-zinc-800 bg-zinc-900/50 pl-9 pr-3 text-sm text-zinc-200 placeholder:text-zinc-600 transition-all focus:border-zinc-700 focus:outline-none focus:ring-1 focus:ring-zinc-700"
+                className="h-9 w-56 rounded-lg border border-slate-200 bg-slate-50 pl-9 pr-3 text-sm text-slate-800 placeholder:text-slate-400 transition-all focus:border-slate-200 focus:outline-none focus:ring-1 focus:ring-slate-300"
               />
-              <kbd className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded border border-zinc-700 bg-zinc-800 px-1.5 py-0.5 text-[9px] text-zinc-500">
+              <kbd className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-[9px] text-slate-400">
                 /
               </kbd>
             </div>
@@ -500,7 +500,7 @@ export default async function PublicKBPage({
 
       <div className="mx-auto flex max-w-7xl">
         {/* Left Sidebar */}
-        <aside className="hidden w-64 shrink-0 border-r border-zinc-800/50 lg:block">
+        <aside className="hidden w-64 shrink-0 border-r border-slate-200 lg:block">
           <div className="sticky top-0 h-[calc(100vh-64px)] overflow-y-auto px-4 py-6">
             <SidebarNav
               categories={sidebarCategories}
@@ -513,27 +513,27 @@ export default async function PublicKBPage({
         {/* Main Content */}
         <main className="min-w-0 flex-1 px-8 py-8 lg:px-12">
           {/* Breadcrumbs */}
-          <nav className="mb-6 flex items-center gap-1.5 text-xs text-zinc-500">
+          <nav className="mb-6 flex items-center gap-1.5 text-xs text-slate-400">
             <a
               href={`/kb/${subdomain}`}
-              className="transition-colors hover:text-zinc-300"
+              className="transition-colors hover:text-slate-700"
             >
               Home
             </a>
             <ChevronRight className="h-3 w-3" />
-            <a href="#" className="transition-colors hover:text-zinc-300">
+            <a href="#" className="transition-colors hover:text-slate-700">
               {categoryName}
             </a>
             <ChevronRight className="h-3 w-3" />
-            <span className="text-zinc-300">{pageTitle}</span>
+            <span className="text-slate-700">{pageTitle}</span>
           </nav>
 
           {/* Page Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold tracking-tight text-white">
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900">
               {pageTitle}
             </h1>
-            <div className="mt-3 flex items-center gap-4 text-xs text-zinc-500">
+            <div className="mt-3 flex items-center gap-4 text-xs text-slate-400">
               <span className="flex items-center gap-1.5">
                 <Clock className="h-3.5 w-3.5" />
                 {readTime}
@@ -550,14 +550,14 @@ export default async function PublicKBPage({
           <ArticleContent />
 
           {/* Feedback */}
-          <div className="mt-12 rounded-xl border border-zinc-800/50 bg-zinc-900/20 p-6 text-center">
-            <p className="text-sm text-zinc-400">Was this article helpful?</p>
+          <div className="mt-12 rounded-xl border border-slate-200 bg-white/20 p-6 text-center">
+            <p className="text-sm text-slate-500">Was this article helpful?</p>
             <div className="mt-3 flex items-center justify-center gap-3">
-              <button className="flex items-center gap-2 rounded-lg border border-zinc-800 px-4 py-2 text-sm text-zinc-400 transition-all hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:text-emerald-400">
+              <button className="flex items-center gap-2 rounded-lg border border-slate-200 px-4 py-2 text-sm text-slate-500 transition-all hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:text-emerald-400">
                 <ThumbsUp className="h-4 w-4" />
                 Yes
               </button>
-              <button className="flex items-center gap-2 rounded-lg border border-zinc-800 px-4 py-2 text-sm text-zinc-400 transition-all hover:border-red-500/30 hover:bg-red-500/5 hover:text-red-400">
+              <button className="flex items-center gap-2 rounded-lg border border-slate-200 px-4 py-2 text-sm text-slate-500 transition-all hover:border-red-500/30 hover:bg-red-500/5 hover:text-red-400">
                 <ThumbsDown className="h-4 w-4" />
                 No
               </button>
@@ -568,25 +568,25 @@ export default async function PublicKBPage({
           <div className="mt-8 grid grid-cols-2 gap-4">
             <a
               href={`/kb/${subdomain}/${prevPage.slug}`}
-              className="group rounded-xl border border-zinc-800/50 p-4 transition-all hover:border-zinc-700 hover:bg-zinc-900/30"
+              className="group rounded-xl border border-slate-200 p-4 transition-all hover:border-slate-300 hover:bg-white/30"
             >
-              <div className="flex items-center gap-1.5 text-xs text-zinc-600">
+              <div className="flex items-center gap-1.5 text-xs text-slate-400">
                 <ChevronLeft className="h-3 w-3" />
                 Previous
               </div>
-              <div className="mt-1 text-sm font-medium text-zinc-300 transition-colors group-hover:text-indigo-400">
+              <div className="mt-1 text-sm font-medium text-slate-700 transition-colors group-hover:text-green-600">
                 {prevPage.title}
               </div>
             </a>
             <a
               href={`/kb/${subdomain}/${nextPage.slug}`}
-              className="group rounded-xl border border-zinc-800/50 p-4 text-right transition-all hover:border-zinc-700 hover:bg-zinc-900/30"
+              className="group rounded-xl border border-slate-200 p-4 text-right transition-all hover:border-slate-300 hover:bg-white/30"
             >
-              <div className="flex items-center justify-end gap-1.5 text-xs text-zinc-600">
+              <div className="flex items-center justify-end gap-1.5 text-xs text-slate-400">
                 Next
                 <ChevronRight className="h-3 w-3" />
               </div>
-              <div className="mt-1 text-sm font-medium text-zinc-300 transition-colors group-hover:text-indigo-400">
+              <div className="mt-1 text-sm font-medium text-slate-700 transition-colors group-hover:text-green-600">
                 {nextPage.title}
               </div>
             </a>
@@ -602,18 +602,18 @@ export default async function PublicKBPage({
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-800/50">
+      <footer className="border-t border-slate-200">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-          <div className="flex items-center gap-2 text-xs text-zinc-600">
-            <div className="flex h-5 w-5 items-center justify-center rounded bg-gradient-to-br from-indigo-500 to-violet-500">
-              <BookOpen className="h-3 w-3 text-white" />
+          <div className="flex items-center gap-2 text-xs text-slate-400">
+            <div className="flex h-5 w-5 items-center justify-center rounded bg-gradient-to-br from-green-500 to-emerald-500">
+              <BookOpen className="h-3 w-3 text-slate-900" />
             </div>
             Powered by ScreenFlow
           </div>
-          <div className="flex items-center gap-4 text-xs text-zinc-600">
-            <a href="#" className="transition-colors hover:text-zinc-400">Status</a>
-            <a href="#" className="transition-colors hover:text-zinc-400">Privacy</a>
-            <a href="#" className="transition-colors hover:text-zinc-400">Terms</a>
+          <div className="flex items-center gap-4 text-xs text-slate-400">
+            <a href="#" className="transition-colors hover:text-slate-500">Status</a>
+            <a href="#" className="transition-colors hover:text-slate-500">Privacy</a>
+            <a href="#" className="transition-colors hover:text-slate-500">Terms</a>
           </div>
         </div>
       </footer>

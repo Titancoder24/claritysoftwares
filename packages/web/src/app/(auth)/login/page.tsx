@@ -70,7 +70,7 @@ export default function LoginPage() {
   };
 
   return (
-    <Card className="border-zinc-800/50">
+    <Card className="border-slate-200 bg-white shadow-sm">
       <CardContent className="p-8">
         <div className="mb-6 text-center">
           <h2 className="text-xl font-semibold text-foreground">
@@ -82,7 +82,7 @@ export default function LoginPage() {
         </div>
 
         {error && (
-          <div className="mb-4 rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+          <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
             {error}
           </div>
         )}

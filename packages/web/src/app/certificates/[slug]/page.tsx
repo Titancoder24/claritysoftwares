@@ -41,13 +41,13 @@ export default function CertificateVerificationPage({
   const isValid = true;
 
   return (
-    <div className="min-h-screen bg-[#09090b]">
+    <div className="min-h-screen bg-[#f5f5f5]">
       {/* Header */}
       <header className="border-b border-border">
         <div className="mx-auto max-w-4xl px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-green-600 to-emerald-600">
                 <GraduationCap className="h-5 w-5 text-white" />
               </div>
               <div>
@@ -131,8 +131,8 @@ export default function CertificateVerificationPage({
               </div>
               <div className="space-y-4 p-4">
                 <div className="flex items-start gap-3">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-zinc-800">
-                    <Shield className="h-4 w-4 text-indigo-400" />
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100">
+                    <Shield className="h-4 w-4 text-green-600" />
                   </div>
                   <div>
                     <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
@@ -145,7 +145,7 @@ export default function CertificateVerificationPage({
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-zinc-800">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100">
                     <User className="h-4 w-4 text-emerald-400" />
                   </div>
                   <div>
@@ -157,7 +157,7 @@ export default function CertificateVerificationPage({
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-zinc-800">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100">
                     <Calendar className="h-4 w-4 text-amber-400" />
                   </div>
                   <div>
@@ -169,7 +169,7 @@ export default function CertificateVerificationPage({
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-zinc-800">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100">
                     <Award className="h-4 w-4 text-violet-400" />
                   </div>
                   <div>
@@ -208,7 +208,7 @@ export default function CertificateVerificationPage({
                 )}
                 <div className="grid grid-cols-2 gap-3 pt-1">
                   {certificate.score !== undefined && (
-                    <div className="rounded-lg bg-zinc-900/50 p-3">
+                    <div className="rounded-lg bg-slate-50 p-3">
                       <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
                         Final Score
                       </p>
@@ -218,7 +218,7 @@ export default function CertificateVerificationPage({
                     </div>
                   )}
                   {certificate.hoursCompleted && (
-                    <div className="rounded-lg bg-zinc-900/50 p-3">
+                    <div className="rounded-lg bg-slate-50 p-3">
                       <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
                         Hours
                       </p>
@@ -232,14 +232,14 @@ export default function CertificateVerificationPage({
             </div>
 
             {/* Verification Info */}
-            <div className="rounded-lg border border-border bg-zinc-900/30 p-4">
+            <div className="rounded-lg border border-border bg-slate-50 p-4">
               <div className="flex items-center gap-2 mb-2">
-                <Shield className="h-4 w-4 text-zinc-500" />
+                <Shield className="h-4 w-4 text-slate-400" />
                 <span className="text-xs font-medium text-muted-foreground">
                   Cryptographically Verified
                 </span>
               </div>
-              <p className="text-xs text-zinc-600 leading-relaxed">
+              <p className="text-xs text-slate-400 leading-relaxed">
                 This certificate is cryptographically signed and can be independently verified.
                 The verification URL provides permanent proof of this credential.
               </p>
@@ -256,7 +256,7 @@ export default function CertificateVerificationPage({
               <GraduationCap className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm text-muted-foreground">ScreenFlow Academy</span>
             </div>
-            <p className="text-xs text-zinc-600">
+            <p className="text-xs text-slate-400">
               Powered by ScreenFlow
             </p>
           </div>

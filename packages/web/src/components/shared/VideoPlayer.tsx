@@ -138,55 +138,55 @@ export default function VideoPlayer({
     return (
       <div
         className={cn(
-          "relative flex aspect-video items-center justify-center overflow-hidden rounded-xl bg-zinc-900 border border-zinc-800",
+          "relative flex aspect-video items-center justify-center overflow-hidden rounded-xl bg-white border border-slate-200",
           className
         )}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/20 to-violet-950/20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-green-50/40 to-emerald-50/40" />
         <div className="relative z-10 text-center">
           <button
-            className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-indigo-500/10 ring-1 ring-indigo-500/20 transition-all hover:bg-indigo-500/20 hover:ring-indigo-500/40 hover:scale-105"
+            className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-green-600/10 ring-1 ring-green-600/20 transition-all hover:bg-green-600/20 hover:ring-green-600/40 hover:scale-105"
             onClick={togglePlay}
           >
-            <Play className="h-8 w-8 text-indigo-400 ml-1" />
+            <Play className="h-8 w-8 text-green-600 ml-1" />
           </button>
           {title && (
-            <p className="mt-4 text-sm font-medium text-zinc-300">{title}</p>
+            <p className="mt-4 text-sm font-medium text-slate-700">{title}</p>
           )}
-          <p className="mt-1 text-xs text-zinc-600">4:32</p>
+          <p className="mt-1 text-xs text-slate-500">4:32</p>
         </div>
 
         {/* Mock Controls */}
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-4 pb-4 pt-12">
           {/* Progress */}
-          <div className="mb-3 h-1 w-full overflow-hidden rounded-full bg-zinc-800">
-            <div className="h-full w-[35%] rounded-full bg-gradient-to-r from-indigo-500 to-violet-500" />
+          <div className="mb-3 h-1 w-full overflow-hidden rounded-full bg-slate-200">
+            <div className="h-full w-[35%] rounded-full bg-gradient-to-r from-green-600 to-emerald-500" />
           </div>
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <button className="text-zinc-300 transition-colors hover:text-white">
+              <button className="text-slate-700 transition-colors hover:text-slate-900">
                 <Play className="h-5 w-5" />
               </button>
-              <button className="text-zinc-400 transition-colors hover:text-white">
+              <button className="text-slate-500 transition-colors hover:text-slate-900">
                 <SkipBack className="h-4 w-4" />
               </button>
-              <button className="text-zinc-400 transition-colors hover:text-white">
+              <button className="text-slate-500 transition-colors hover:text-slate-900">
                 <SkipForward className="h-4 w-4" />
               </button>
-              <span className="text-xs tabular-nums text-zinc-400">
+              <span className="text-xs tabular-nums text-slate-500">
                 1:35 / 4:32
               </span>
             </div>
 
             <div className="flex items-center gap-3">
-              <button className="text-zinc-400 transition-colors hover:text-white">
+              <button className="text-slate-500 transition-colors hover:text-slate-900">
                 <Volume2 className="h-4 w-4" />
               </button>
-              <span className="rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] font-medium text-zinc-400">
+              <span className="rounded bg-slate-200 px-1.5 py-0.5 text-[10px] font-medium text-slate-500">
                 1x
               </span>
-              <button className="text-zinc-400 transition-colors hover:text-white">
+              <button className="text-slate-500 transition-colors hover:text-slate-900">
                 <Maximize className="h-4 w-4" />
               </button>
             </div>
@@ -241,7 +241,7 @@ export default function VideoPlayer({
         {/* Progress Bar */}
         <div
           ref={progressRef}
-          className="group/progress relative mb-3 h-1.5 cursor-pointer rounded-full bg-zinc-700/50"
+          className="group/progress relative mb-3 h-1.5 cursor-pointer rounded-full bg-slate-300/50"
           onClick={handleProgressClick}
           onMouseMove={handleProgressHover}
           onMouseEnter={() => setHovering(true)}
@@ -249,12 +249,12 @@ export default function VideoPlayer({
         >
           {/* Buffered */}
           <div
-            className="absolute inset-y-0 left-0 rounded-full bg-zinc-600/50"
+            className="absolute inset-y-0 left-0 rounded-full bg-slate-400/50"
             style={{ width: `${(buffered / duration) * 100}%` }}
           />
           {/* Progress */}
           <div
-            className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500"
+            className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-green-600 to-emerald-500"
             style={{ width: `${progress}%` }}
           >
             <div className="absolute right-0 top-1/2 h-3.5 w-3.5 -translate-y-1/2 translate-x-1/2 rounded-full bg-white opacity-0 shadow-lg transition-opacity group-hover/progress:opacity-100" />
@@ -263,7 +263,7 @@ export default function VideoPlayer({
           {/* Hover Time Tooltip */}
           {hovering && (
             <div
-              className="absolute bottom-5 -translate-x-1/2 rounded bg-zinc-900 px-2 py-1 text-[10px] text-white shadow-lg"
+              className="absolute bottom-5 -translate-x-1/2 rounded bg-slate-800 px-2 py-1 text-[10px] text-white shadow-lg"
               style={{ left: `${hoverX}px` }}
             >
               {formatTime(hoverTime)}
@@ -322,7 +322,7 @@ export default function VideoPlayer({
                   setMuted(val === 0);
                   if (videoRef.current) videoRef.current.volume = val;
                 }}
-                className="ml-1 w-0 origin-left scale-x-0 transition-all group-hover/vol:w-20 group-hover/vol:scale-x-100 accent-indigo-500"
+                className="ml-1 w-0 origin-left scale-x-0 transition-all group-hover/vol:w-20 group-hover/vol:scale-x-100 accent-green-600"
               />
             </div>
 
@@ -338,19 +338,19 @@ export default function VideoPlayer({
               {showSpeedMenu && (
                 <>
                   <div className="fixed inset-0 z-40" onClick={() => setShowSpeedMenu(false)} />
-                  <div className="absolute bottom-10 right-0 z-50 min-w-[100px] rounded-lg border border-zinc-800 bg-zinc-900 py-1 shadow-xl">
+                  <div className="absolute bottom-10 right-0 z-50 min-w-[100px] rounded-lg border border-slate-200 bg-white py-1 shadow-xl">
                     {playbackSpeeds.map((speed) => (
                       <button
                         key={speed}
                         onClick={() => changeSpeed(speed)}
                         className={cn(
-                          "flex w-full items-center justify-between px-3 py-1.5 text-xs transition-colors hover:bg-zinc-800",
-                          playbackSpeed === speed ? "text-indigo-400" : "text-zinc-300"
+                          "flex w-full items-center justify-between px-3 py-1.5 text-xs transition-colors hover:bg-slate-100",
+                          playbackSpeed === speed ? "text-green-600" : "text-slate-700"
                         )}
                       >
                         {speed}x
                         {playbackSpeed === speed && (
-                          <div className="h-1.5 w-1.5 rounded-full bg-indigo-400" />
+                          <div className="h-1.5 w-1.5 rounded-full bg-green-600" />
                         )}
                       </button>
                     ))}
@@ -375,7 +375,7 @@ export default function VideoPlayer({
         <div className="absolute inset-0 flex items-center justify-center">
           <button
             onClick={togglePlay}
-            className="flex h-16 w-16 items-center justify-center rounded-full bg-indigo-500/20 ring-1 ring-indigo-500/30 transition-all hover:bg-indigo-500/30 hover:scale-105"
+            className="flex h-16 w-16 items-center justify-center rounded-full bg-green-600/20 ring-1 ring-green-600/30 transition-all hover:bg-green-600/30 hover:scale-105"
           >
             <Play className="h-7 w-7 text-white ml-0.5" />
           </button>

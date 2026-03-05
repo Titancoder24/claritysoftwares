@@ -45,7 +45,7 @@ function Select({
         onChange={handleChange}
         disabled={disabled}
         className={cn(
-          "flex h-10 w-full appearance-none rounded-lg border border-input bg-muted px-3 py-2 pr-8 text-sm text-foreground transition-all duration-200",
+          "flex h-10 w-full appearance-none rounded-lg border border-input bg-white px-3 py-2 pr-8 text-sm text-foreground transition-colors",
           "focus:outline-none focus:ring-2 focus:ring-ring/50 focus:border-primary",
           "disabled:cursor-not-allowed disabled:opacity-50",
         )}

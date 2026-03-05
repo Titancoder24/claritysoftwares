@@ -186,22 +186,22 @@ function QuestionCard({
   };
 
   return (
-    <div className="rounded-xl border border-border bg-card transition-all hover:border-zinc-700">
+    <div className="rounded-xl border border-border bg-card transition-all hover:border-slate-300">
       {/* Question Header */}
       <div
         className="flex cursor-pointer items-center gap-3 px-4 py-3"
         onClick={toggleExpanded}
       >
-        <button className="flex h-7 w-7 shrink-0 cursor-grab items-center justify-center text-zinc-600 hover:text-zinc-400">
+        <button className="flex h-7 w-7 shrink-0 cursor-grab items-center justify-center text-slate-400 hover:text-slate-500">
           <GripVertical className="h-4 w-4" />
         </button>
 
-        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-zinc-800 text-xs font-semibold text-zinc-400">
+        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-slate-100 text-xs font-semibold text-zinc-400">
           {index + 1}
         </div>
 
         <div className="flex flex-1 items-center gap-2 min-w-0">
-          <TypeIcon className="h-4 w-4 shrink-0 text-indigo-400" />
+          <TypeIcon className="h-4 w-4 shrink-0 text-green-600" />
           <span className="truncate text-sm font-medium text-foreground">
             {question.text || "Untitled Question"}
           </span>
@@ -241,8 +241,8 @@ function QuestionCard({
                 className={cn(
                   "flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all",
                   question.type === type
-                    ? "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"
-                    : "text-muted-foreground border border-transparent hover:bg-zinc-800 hover:text-foreground"
+                    ? "bg-green-500/10 text-green-600 border border-green-500/20"
+                    : "text-muted-foreground border border-transparent hover:bg-slate-100 hover:text-foreground"
                 )}
               >
                 <QIcon className="h-3.5 w-3.5" />
@@ -279,7 +279,7 @@ function QuestionCard({
                       "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-all",
                       option.isCorrect
                         ? "bg-emerald-500/15 text-emerald-400"
-                        : "bg-zinc-800 text-zinc-600 hover:text-zinc-400"
+                        : "bg-slate-100 text-slate-400 hover:text-slate-500"
                     )}
                   >
                     {option.isCorrect ? (
@@ -288,7 +288,7 @@ function QuestionCard({
                       <Circle className="h-4 w-4" />
                     )}
                   </button>
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-zinc-800/50 text-xs font-medium text-zinc-500">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-slate-100/50 text-xs font-medium text-slate-400">
                     {String.fromCharCode(65 + optIdx)}
                   </div>
                   <Input
@@ -300,7 +300,7 @@ function QuestionCard({
                   {question.options.length > 2 && (
                     <button
                       onClick={() => removeOption(option.id)}
-                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-zinc-600 hover:bg-red-500/10 hover:text-red-400"
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-slate-400 hover:bg-red-500/10 hover:text-red-400"
                     >
                       <X className="h-3.5 w-3.5" />
                     </button>
@@ -309,7 +309,7 @@ function QuestionCard({
               ))}
               <button
                 onClick={addOption}
-                className="flex items-center gap-2 rounded-lg px-3 py-2 text-xs text-zinc-500 transition-colors hover:bg-zinc-800/50 hover:text-zinc-300"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-xs text-slate-400 transition-colors hover:bg-slate-100/50 hover:text-slate-700"
               >
                 <Plus className="h-3 w-3" />
                 Add Option
@@ -332,7 +332,7 @@ function QuestionCard({
                       "flex flex-1 items-center justify-center gap-2 rounded-lg border px-4 py-3 text-sm font-medium transition-all",
                       option.isCorrect
                         ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
-                        : "border-border bg-zinc-900/50 text-muted-foreground hover:border-zinc-600 hover:text-foreground"
+                        : "border-border bg-slate-50 text-muted-foreground hover:border-slate-300 hover:text-foreground"
                     )}
                   >
                     {option.isCorrect && <CheckCircle2 className="h-4 w-4" />}
@@ -379,7 +379,7 @@ function QuestionCard({
                       onChange={(e) => updateMatchingPair(pair.id, { left: e.target.value })}
                       placeholder="Term..."
                     />
-                    <ArrowLeftRight className="h-4 w-4 text-zinc-600" />
+                    <ArrowLeftRight className="h-4 w-4 text-slate-400" />
                     <Input
                       value={pair.right}
                       onChange={(e) => updateMatchingPair(pair.id, { right: e.target.value })}
@@ -387,7 +387,7 @@ function QuestionCard({
                     />
                     <button
                       onClick={() => removeMatchingPair(pair.id)}
-                      className="flex h-8 w-8 items-center justify-center rounded-md text-zinc-600 hover:bg-red-500/10 hover:text-red-400"
+                      className="flex h-8 w-8 items-center justify-center rounded-md text-slate-400 hover:bg-red-500/10 hover:text-red-400"
                     >
                       <X className="h-3.5 w-3.5" />
                     </button>
@@ -396,7 +396,7 @@ function QuestionCard({
               </div>
               <button
                 onClick={addMatchingPair}
-                className="flex items-center gap-2 rounded-lg px-3 py-2 text-xs text-zinc-500 transition-colors hover:bg-zinc-800/50 hover:text-zinc-300"
+                className="flex items-center gap-2 rounded-lg px-3 py-2 text-xs text-slate-400 transition-colors hover:bg-slate-100/50 hover:text-slate-700"
               >
                 <Plus className="h-3 w-3" />
                 Add Pair
@@ -477,9 +477,9 @@ function QuizSettingsPanel({
             step={5}
             value={settings.passThreshold}
             onChange={(e) => onUpdate({ passThreshold: parseInt(e.target.value) })}
-            className="w-full accent-indigo-500 h-1.5 rounded-full appearance-none bg-zinc-800 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-indigo-500 [&::-webkit-slider-thumb]:cursor-pointer"
+            className="w-full accent-green-500 h-1.5 rounded-full appearance-none bg-slate-100 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-green-500 [&::-webkit-slider-thumb]:cursor-pointer"
           />
-          <div className="flex justify-between text-[10px] text-zinc-600">
+          <div className="flex justify-between text-[10px] text-slate-400">
             <span>0%</span>
             <span>50%</span>
             <span>100%</span>
@@ -494,16 +494,16 @@ function QuizSettingsPanel({
           <div className="flex items-center gap-2">
             <button
               onClick={() => onUpdate({ maxRetakes: Math.max(0, settings.maxRetakes - 1) })}
-              className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-muted-foreground hover:bg-zinc-800 hover:text-foreground"
+              className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-muted-foreground hover:bg-slate-100 hover:text-foreground"
             >
               -
             </button>
-            <div className="flex h-8 flex-1 items-center justify-center rounded-md bg-zinc-900 text-sm font-medium text-foreground">
+            <div className="flex h-8 flex-1 items-center justify-center rounded-md bg-white text-sm font-medium text-foreground">
               {settings.maxRetakes === 0 ? "Unlimited" : settings.maxRetakes}
             </div>
             <button
               onClick={() => onUpdate({ maxRetakes: settings.maxRetakes + 1 })}
-              className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-muted-foreground hover:bg-zinc-800 hover:text-foreground"
+              className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-muted-foreground hover:bg-slate-100 hover:text-foreground"
             >
               +
             </button>
@@ -554,7 +554,7 @@ function QuizSettingsPanel({
                 className="text-muted-foreground transition-colors hover:text-foreground"
               >
                 {value ? (
-                  <ToggleRight className="h-7 w-7 text-indigo-400" />
+                  <ToggleRight className="h-7 w-7 text-green-600" />
                 ) : (
                   <ToggleLeft className="h-7 w-7" />
                 )}
@@ -641,7 +641,7 @@ export function QuizBuilder({ initialQuestions, onChange }: QuizBuilderProps) {
       {/* Questions List */}
       <div className="flex-1 space-y-4">
         {/* Summary Bar */}
-        <div className="flex items-center justify-between rounded-lg border border-border bg-zinc-900/50 px-4 py-3">
+        <div className="flex items-center justify-between rounded-lg border border-border bg-slate-50 px-4 py-3">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <HelpCircle className="h-4 w-4 text-violet-400" />
@@ -676,7 +676,7 @@ export function QuizBuilder({ initialQuestions, onChange }: QuizBuilderProps) {
         <div className="relative">
           <button
             onClick={() => setShowTypeSelector(!showTypeSelector)}
-            className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-zinc-700 py-4 text-sm text-muted-foreground transition-colors hover:border-zinc-500 hover:text-foreground"
+            className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-slate-200 py-4 text-sm text-muted-foreground transition-colors hover:border-slate-400 hover:text-foreground"
           >
             <Plus className="h-4 w-4" />
             Add Question
@@ -685,15 +685,15 @@ export function QuizBuilder({ initialQuestions, onChange }: QuizBuilderProps) {
           {showTypeSelector && (
             <>
               <div className="fixed inset-0 z-10" onClick={() => setShowTypeSelector(false)} />
-              <div className="absolute left-1/2 top-full z-20 mt-2 w-72 -translate-x-1/2 rounded-xl border border-border bg-zinc-900 p-2 shadow-xl shadow-black/40">
+              <div className="absolute left-1/2 top-full z-20 mt-2 w-72 -translate-x-1/2 rounded-xl border border-border bg-white p-2 shadow-xl shadow-slate-200/50">
                 {QUESTION_TYPES.map(({ type, icon: QIcon, label, description }) => (
                   <button
                     key={type}
                     onClick={() => addQuestion(type)}
-                    className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-zinc-800"
+                    className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-slate-100"
                   >
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10">
-                      <QIcon className="h-4 w-4 text-indigo-400" />
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-500/10">
+                      <QIcon className="h-4 w-4 text-green-600" />
                     </div>
                     <div>
                       <p className="text-sm font-medium text-foreground">{label}</p>

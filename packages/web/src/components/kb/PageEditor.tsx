@@ -86,8 +86,8 @@ function ToolbarButton({
       className={cn(
         "rounded-md p-1.5 transition-colors",
         active
-          ? "bg-zinc-700 text-white"
-          : "text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300"
+          ? "bg-slate-200 text-slate-900"
+          : "text-slate-400 hover:bg-slate-100 hover:text-slate-700"
       )}
     >
       <Icon className="h-4 w-4" />
@@ -111,32 +111,32 @@ function ProjectSelector({
 
   return (
     <div className="space-y-3">
-      <label className="block text-sm font-medium text-zinc-300">
+      <label className="block text-sm font-medium text-slate-700">
         Select {contentType === "video" ? "Recording" : "Guide"} Project
       </label>
       <div className="relative">
         <button
           onClick={() => setOpen(!open)}
-          className="flex w-full items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900/50 px-4 py-3 text-left transition-colors hover:border-zinc-700"
+          className="flex w-full items-center justify-between rounded-lg border border-slate-200 bg-white px-4 py-3 text-left transition-colors hover:border-slate-300"
         >
           {selected ? (
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-14 items-center justify-center rounded-md bg-zinc-800">
-                <Play className="h-4 w-4 text-zinc-400" />
+              <div className="flex h-10 w-14 items-center justify-center rounded-md bg-slate-100">
+                <Play className="h-4 w-4 text-slate-500" />
               </div>
               <div>
-                <div className="text-sm font-medium text-zinc-200">{selected.name}</div>
-                <div className="text-xs text-zinc-500">
+                <div className="text-sm font-medium text-slate-800">{selected.name}</div>
+                <div className="text-xs text-slate-400">
                   {selected.duration} {selected.steps && `/ ${selected.steps} steps`}
                 </div>
               </div>
             </div>
           ) : (
-            <span className="text-sm text-zinc-500">Choose a project...</span>
+            <span className="text-sm text-slate-400">Choose a project...</span>
           )}
           <ChevronDown
             className={cn(
-              "h-4 w-4 text-zinc-500 transition-transform",
+              "h-4 w-4 text-slate-400 transition-transform",
               open && "rotate-180"
             )}
           />
@@ -145,7 +145,7 @@ function ProjectSelector({
         {open && (
           <>
             <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-            <div className="absolute left-0 right-0 top-full z-50 mt-1 max-h-64 overflow-y-auto rounded-lg border border-zinc-800 bg-zinc-900 py-1 shadow-xl shadow-black/30">
+            <div className="absolute left-0 right-0 top-full z-50 mt-1 max-h-64 overflow-y-auto rounded-lg border border-slate-200 bg-white py-1 shadow-xl shadow-slate-200/50">
               {projects.map((project) => (
                 <button
                   key={project.id}
@@ -154,16 +154,16 @@ function ProjectSelector({
                     setOpen(false);
                   }}
                   className={cn(
-                    "flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-zinc-800",
-                    selectedId === project.id && "bg-indigo-500/10"
+                    "flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-slate-100",
+                    selectedId === project.id && "bg-green-500/10"
                   )}
                 >
-                  <div className="flex h-8 w-12 items-center justify-center rounded bg-zinc-800">
-                    <Play className="h-3 w-3 text-zinc-400" />
+                  <div className="flex h-8 w-12 items-center justify-center rounded bg-slate-100">
+                    <Play className="h-3 w-3 text-slate-500" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="truncate text-sm text-zinc-200">{project.name}</div>
-                    <div className="text-xs text-zinc-500">
+                    <div className="truncate text-sm text-slate-800">{project.name}</div>
+                    <div className="text-xs text-slate-400">
                       {project.duration} {project.steps && `/ ${project.steps} steps`}
                     </div>
                   </div>
@@ -176,14 +176,14 @@ function ProjectSelector({
 
       {/* Preview Area */}
       {selected && (
-        <div className="mt-4 overflow-hidden rounded-lg border border-zinc-800">
-          <div className="flex aspect-video items-center justify-center bg-zinc-900">
+        <div className="mt-4 overflow-hidden rounded-lg border border-slate-200">
+          <div className="flex aspect-video items-center justify-center bg-white">
             <div className="text-center">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-indigo-500/10 transition-colors hover:bg-indigo-500/20">
-                <Play className="h-8 w-8 text-indigo-400" />
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10 transition-colors hover:bg-green-500/20">
+                <Play className="h-8 w-8 text-green-600" />
               </div>
-              <p className="mt-3 text-sm font-medium text-zinc-300">{selected.name}</p>
-              <p className="mt-1 text-xs text-zinc-500">{selected.duration}</p>
+              <p className="mt-3 text-sm font-medium text-slate-700">{selected.name}</p>
+              <p className="mt-1 text-xs text-slate-400">{selected.duration}</p>
             </div>
           </div>
         </div>
@@ -200,25 +200,25 @@ function RichTextEditor({
   onChange: (content: string) => void;
 }) {
   return (
-    <div className="rounded-lg border border-zinc-800 bg-zinc-900/30">
+    <div className="rounded-lg border border-slate-200 bg-white/30">
       {/* Toolbar */}
-      <div className="flex items-center gap-0.5 border-b border-zinc-800 px-3 py-2">
+      <div className="flex items-center gap-0.5 border-b border-slate-200 px-3 py-2">
         <ToolbarButton icon={Undo} label="Undo" />
         <ToolbarButton icon={Redo} label="Redo" />
-        <div className="mx-1.5 h-4 w-px bg-zinc-800" />
+        <div className="mx-1.5 h-4 w-px bg-slate-200" />
         <ToolbarButton icon={Heading1} label="Heading 1" />
         <ToolbarButton icon={Heading2} label="Heading 2" />
-        <div className="mx-1.5 h-4 w-px bg-zinc-800" />
+        <div className="mx-1.5 h-4 w-px bg-slate-200" />
         <ToolbarButton icon={Bold} label="Bold" />
         <ToolbarButton icon={Italic} label="Italic" />
         <ToolbarButton icon={Underline} label="Underline" />
         <ToolbarButton icon={Code} label="Code" />
-        <div className="mx-1.5 h-4 w-px bg-zinc-800" />
+        <div className="mx-1.5 h-4 w-px bg-slate-200" />
         <ToolbarButton icon={List} label="Bullet List" />
         <ToolbarButton icon={ListOrdered} label="Numbered List" />
         <ToolbarButton icon={Quote} label="Blockquote" />
         <ToolbarButton icon={Minus} label="Divider" />
-        <div className="mx-1.5 h-4 w-px bg-zinc-800" />
+        <div className="mx-1.5 h-4 w-px bg-slate-200" />
         <ToolbarButton icon={Link} label="Link" />
         <ToolbarButton icon={Image} label="Image" />
         <div className="flex-1" />
@@ -228,7 +228,7 @@ function RichTextEditor({
 
       {/* Editor Area */}
       <textarea
-        className="min-h-[400px] w-full resize-none bg-transparent px-6 py-4 text-sm leading-relaxed text-zinc-200 placeholder:text-zinc-600 focus:outline-none"
+        className="min-h-[400px] w-full resize-none bg-transparent px-6 py-4 text-sm leading-relaxed text-slate-800 placeholder:text-slate-400 focus:outline-none"
         placeholder="Start writing your article content here...
 
 You can use markdown-style formatting:
@@ -260,8 +260,8 @@ export default function PageEditor({
   return (
     <div className="flex h-full flex-col">
       {/* Content Type Tabs */}
-      <div className="flex items-center justify-between border-b border-zinc-800/50 px-6 py-3">
-        <div className="flex items-center gap-1 rounded-lg bg-zinc-900/50 p-1">
+      <div className="flex items-center justify-between border-b border-slate-200/50 px-6 py-3">
+        <div className="flex items-center gap-1 rounded-lg bg-white/50 p-1">
           {contentTypes.map(({ type, label, icon: Icon }) => (
             <button
               key={type}
@@ -269,8 +269,8 @@ export default function PageEditor({
               className={cn(
                 "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-all",
                 contentType === type
-                  ? "bg-zinc-800 text-white shadow-sm"
-                  : "text-zinc-500 hover:text-zinc-300"
+                  ? "bg-slate-200 text-slate-900 shadow-sm"
+                  : "text-slate-400 hover:text-slate-700"
               )}
             >
               <Icon className="h-3.5 w-3.5" />
@@ -285,8 +285,8 @@ export default function PageEditor({
             className={cn(
               "flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
               preview
-                ? "bg-indigo-500/10 text-indigo-400"
-                : "text-zinc-500 hover:text-zinc-300"
+                ? "bg-green-500/10 text-green-600"
+                : "text-slate-400 hover:text-slate-700"
             )}
           >
             {preview ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
@@ -312,10 +312,10 @@ export default function PageEditor({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Untitled Page"
-            className="w-full bg-transparent text-3xl font-bold tracking-tight text-white placeholder:text-zinc-700 focus:outline-none"
+            className="w-full bg-transparent text-3xl font-bold tracking-tight text-slate-900 placeholder:text-slate-300 focus:outline-none"
           />
 
-          <div className="mt-1 text-sm text-zinc-600">
+          <div className="mt-1 text-sm text-slate-400">
             {contentType === "video" && "Embed a recorded video from your projects"}
             {contentType === "guide" && "Select a step-by-step guide from your projects"}
             {contentType === "article" && "Write rich text content with formatting"}
@@ -346,9 +346,9 @@ export default function PageEditor({
                   contentType="video"
                 />
                 <div className="relative">
-                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent" />
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
                   <div className="pt-6">
-                    <label className="mb-3 block text-sm font-medium text-zinc-300">
+                    <label className="mb-3 block text-sm font-medium text-slate-700">
                       Additional Content
                     </label>
                     <RichTextEditor content={content} onChange={setContent} />

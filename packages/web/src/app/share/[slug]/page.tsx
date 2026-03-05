@@ -81,34 +81,34 @@ function VideoPlayer({ project }: { project: SharedProject }) {
   }, [playing]);
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950">
+    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
       {/* Video area */}
       <div
-        className="relative flex aspect-video items-center justify-center bg-zinc-900 cursor-pointer"
+        className="relative flex aspect-video items-center justify-center bg-slate-50 cursor-pointer"
         onClick={() => setPlaying(!playing)}
       >
         {/* Fake video content */}
-        <div className="absolute inset-8 rounded-xl bg-zinc-800/40" />
-        <div className="absolute left-12 top-12 h-4 w-32 rounded bg-zinc-700/50" />
-        <div className="absolute left-12 top-20 h-3 w-24 rounded bg-zinc-700/30" />
+        <div className="absolute inset-8 rounded-xl bg-slate-100" />
+        <div className="absolute left-12 top-12 h-4 w-32 rounded bg-slate-200/50" />
+        <div className="absolute left-12 top-20 h-3 w-24 rounded bg-slate-200/30" />
 
         {/* Play/pause overlay */}
         {!playing && (
-          <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-600/90 shadow-2xl shadow-indigo-500/30 transition-transform hover:scale-105">
+          <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-green-600/90 shadow-2xl shadow-green-500/30 transition-transform hover:scale-105">
             <Play className="h-7 w-7 text-white ml-0.5" />
           </div>
         )}
       </div>
 
       {/* Controls */}
-      <div className="border-t border-zinc-800 px-4 py-3">
+      <div className="border-t border-slate-200 px-4 py-3">
         <div className="mb-2 flex items-center gap-2">
-          <div className="h-1 flex-1 cursor-pointer rounded-full bg-zinc-800" onClick={(e) => {
+          <div className="h-1 flex-1 cursor-pointer rounded-full bg-slate-100" onClick={(e) => {
             const rect = e.currentTarget.getBoundingClientRect();
             setProgress(((e.clientX - rect.left) / rect.width) * 100);
           }}>
             <div
-              className="h-1 rounded-full bg-indigo-500 transition-all"
+              className="h-1 rounded-full bg-green-500 transition-all"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -117,7 +117,7 @@ function VideoPlayer({ project }: { project: SharedProject }) {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setPlaying(!playing)}
-              className="rounded-lg p-1.5 text-zinc-400 transition-colors hover:text-white"
+              className="rounded-lg p-1.5 text-slate-500 transition-colors hover:text-slate-900"
             >
               {playing ? (
                 <Pause className="h-4 w-4" />
@@ -125,12 +125,12 @@ function VideoPlayer({ project }: { project: SharedProject }) {
                 <Play className="h-4 w-4" />
               )}
             </button>
-            <Volume2 className="h-4 w-4 text-zinc-500" />
-            <span className="text-xs tabular-nums text-zinc-500">
+            <Volume2 className="h-4 w-4 text-slate-400" />
+            <span className="text-xs tabular-nums text-slate-400">
               {Math.floor(progress * 0.0432)}:{String(Math.floor((progress * 2.72) % 60)).padStart(2, "0")} / {project.duration || "4:32"}
             </span>
           </div>
-          <button className="rounded-lg p-1.5 text-zinc-400 transition-colors hover:text-white">
+          <button className="rounded-lg p-1.5 text-slate-500 transition-colors hover:text-slate-900">
             <Maximize2 className="h-4 w-4" />
           </button>
         </div>
@@ -148,17 +148,17 @@ function GuideRenderer({ project }: { project: SharedProject }) {
   const steps = project.steps || [];
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950">
+    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
       {/* Step navigation header */}
-      <div className="flex items-center justify-between border-b border-zinc-800 px-6 py-4">
-        <span className="text-sm text-zinc-400">
+      <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
+        <span className="text-sm text-slate-500">
           Step {currentStep + 1} of {steps.length}
         </span>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
             disabled={currentStep === 0}
-            className="rounded-lg border border-zinc-800 p-1.5 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-white disabled:opacity-30 disabled:hover:border-zinc-800 disabled:hover:text-zinc-400"
+            className="rounded-lg border border-slate-200 p-1.5 text-slate-500 transition-colors hover:border-slate-300 hover:text-slate-900 disabled:opacity-30 disabled:hover:border-slate-200 disabled:hover:text-slate-500"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -167,7 +167,7 @@ function GuideRenderer({ project }: { project: SharedProject }) {
               setCurrentStep(Math.min(steps.length - 1, currentStep + 1))
             }
             disabled={currentStep === steps.length - 1}
-            className="rounded-lg border border-zinc-800 p-1.5 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-white disabled:opacity-30 disabled:hover:border-zinc-800 disabled:hover:text-zinc-400"
+            className="rounded-lg border border-slate-200 p-1.5 text-slate-500 transition-colors hover:border-slate-300 hover:text-slate-900 disabled:opacity-30 disabled:hover:border-slate-200 disabled:hover:text-slate-500"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
@@ -175,9 +175,9 @@ function GuideRenderer({ project }: { project: SharedProject }) {
       </div>
 
       {/* Progress bar */}
-      <div className="h-0.5 bg-zinc-800">
+      <div className="h-0.5 bg-slate-100">
         <div
-          className="h-full bg-indigo-500 transition-all duration-300"
+          className="h-full bg-green-500 transition-all duration-300"
           style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
         />
       </div>
@@ -187,23 +187,23 @@ function GuideRenderer({ project }: { project: SharedProject }) {
         {steps[currentStep] && (
           <div>
             <div className="mb-4 flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-500/15 text-sm font-bold text-indigo-400">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500/15 text-sm font-bold text-green-600">
                 {currentStep + 1}
               </div>
               <h3 className="text-lg font-semibold">
                 {steps[currentStep].title}
               </h3>
             </div>
-            <p className="mb-6 text-sm leading-relaxed text-zinc-400">
+            <p className="mb-6 text-sm leading-relaxed text-slate-500">
               {steps[currentStep].description}
             </p>
             {/* Placeholder screenshot */}
-            <div className="aspect-video rounded-xl border border-zinc-800 bg-zinc-900/50 flex items-center justify-center">
+            <div className="aspect-video rounded-xl border border-slate-200 bg-slate-50/50 flex items-center justify-center">
               <div className="text-center">
-                <div className="mx-auto h-12 w-12 rounded-lg bg-zinc-800 flex items-center justify-center mb-2">
-                  <ExternalLink className="h-5 w-5 text-zinc-600" />
+                <div className="mx-auto h-12 w-12 rounded-lg bg-slate-100 flex items-center justify-center mb-2">
+                  <ExternalLink className="h-5 w-5 text-slate-400" />
                 </div>
-                <p className="text-xs text-zinc-600">Screenshot placeholder</p>
+                <p className="text-xs text-slate-400">Screenshot placeholder</p>
               </div>
             </div>
           </div>
@@ -211,17 +211,17 @@ function GuideRenderer({ project }: { project: SharedProject }) {
       </div>
 
       {/* Step dots */}
-      <div className="flex justify-center gap-1.5 border-t border-zinc-800 px-6 py-4">
+      <div className="flex justify-center gap-1.5 border-t border-slate-200 px-6 py-4">
         {steps.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrentStep(i)}
             className={`h-2 w-2 rounded-full transition-all ${
               i === currentStep
-                ? "w-6 bg-indigo-500"
+                ? "w-6 bg-green-500"
                 : i < currentStep
-                  ? "bg-indigo-500/40"
-                  : "bg-zinc-700"
+                  ? "bg-green-500/40"
+                  : "bg-slate-200"
             }`}
           />
         ))}
@@ -249,7 +249,7 @@ function ShareButtons({ slug }: { slug: string }) {
     <div className="flex flex-wrap gap-3">
       <button
         onClick={() => copy(shareUrl, "link")}
-        className="inline-flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/50 px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:border-zinc-700 hover:text-white"
+        className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50/50 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-slate-300 hover:text-slate-900"
       >
         {copied === "link" ? (
           <Check className="h-4 w-4 text-emerald-400" />
@@ -260,7 +260,7 @@ function ShareButtons({ slug }: { slug: string }) {
       </button>
       <button
         onClick={() => copy(embedCode, "embed")}
-        className="inline-flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/50 px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:border-zinc-700 hover:text-white"
+        className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50/50 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-slate-300 hover:text-slate-900"
       >
         {copied === "embed" ? (
           <Check className="h-4 w-4 text-emerald-400" />
@@ -283,12 +283,12 @@ export default function SharedPage() {
   const project = getProject(slug);
 
   return (
-    <div className="min-h-screen bg-[#09090b]">
+    <div className="min-h-screen bg-[#f5f5f5]">
       {/* Minimal header */}
-      <header className="border-b border-zinc-800/50">
+      <header className="border-b border-slate-200">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
           <a href="/" className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-gradient-to-br from-indigo-500 to-violet-600">
+            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-gradient-to-br from-green-500 to-emerald-600">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                 <path
                   d="M3 3h4v4H3V3Zm6 0h4v4H9V3ZM3 9h4v4H3V9Zm6 2.5L15 9v4l-6 2.5V11Z"
@@ -296,13 +296,13 @@ export default function SharedPage() {
                 />
               </svg>
             </div>
-            <span className="text-sm font-semibold text-zinc-300">
+            <span className="text-sm font-semibold text-slate-700">
               ScreenFlow
             </span>
           </a>
           <a
             href="/auth/signup"
-            className="rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-3.5 py-1.5 text-xs font-medium text-white transition-all hover:from-indigo-500 hover:to-violet-500"
+            className="rounded-lg bg-gradient-to-r from-green-600 to-emerald-600 px-3.5 py-1.5 text-xs font-medium text-white transition-all hover:from-green-500 hover:to-emerald-500"
           >
             Try ScreenFlow Free
           </a>
@@ -313,7 +313,7 @@ export default function SharedPage() {
       <main className="mx-auto max-w-5xl px-6 py-10">
         {/* Title area */}
         <div className="mb-8">
-          <div className="mb-2 inline-flex items-center gap-1.5 rounded-md border border-zinc-800 bg-zinc-900/50 px-2 py-0.5 text-xs font-medium text-zinc-400">
+          <div className="mb-2 inline-flex items-center gap-1.5 rounded-md border border-slate-200 bg-slate-50/50 px-2 py-0.5 text-xs font-medium text-slate-500">
             {project.type === "video"
               ? "Video"
               : project.type === "guide"
@@ -323,9 +323,9 @@ export default function SharedPage() {
           <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
             {project.title}
           </h1>
-          <div className="mt-2 flex items-center gap-3 text-sm text-zinc-500">
+          <div className="mt-2 flex items-center gap-3 text-sm text-slate-400">
             <span>By {project.author}</span>
-            <span className="text-zinc-700">|</span>
+            <span className="text-slate-300">|</span>
             <span>{new Date(project.createdAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
           </div>
         </div>
@@ -343,12 +343,12 @@ export default function SharedPage() {
         </div>
 
         {/* Powered by */}
-        <div className="mt-16 border-t border-zinc-800/50 pt-8 text-center">
-          <p className="text-xs text-zinc-600">
+        <div className="mt-16 border-t border-slate-200 pt-8 text-center">
+          <p className="text-xs text-slate-400">
             Created with{" "}
             <a
               href="/"
-              className="font-medium text-zinc-400 transition-colors hover:text-indigo-400"
+              className="font-medium text-slate-500 transition-colors hover:text-green-600"
             >
               ScreenFlow
             </a>{" "}

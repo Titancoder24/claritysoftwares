@@ -110,11 +110,11 @@ function SortableLesson({ lesson, isSelected, onSelect, onDelete, onRename }: So
       className={cn(
         "group/lesson flex items-center gap-1.5 rounded-md pr-1 transition-all",
         isDragging && "opacity-50",
-        isSelected && "bg-indigo-500/10"
+        isSelected && "bg-green-500/10"
       )}
     >
       <button
-        className="flex h-6 w-6 shrink-0 cursor-grab items-center justify-center text-zinc-700 transition-colors hover:text-zinc-400"
+        className="flex h-6 w-6 shrink-0 cursor-grab items-center justify-center text-slate-300 transition-colors hover:text-slate-500"
         {...attributes}
         {...listeners}
       >
@@ -152,7 +152,7 @@ function SortableLesson({ lesson, isSelected, onSelect, onDelete, onRename }: So
       </button>
 
       {lesson.duration && (
-        <span className="shrink-0 text-[10px] text-zinc-600">{lesson.duration}</span>
+        <span className="shrink-0 text-[10px] text-slate-400">{lesson.duration}</span>
       )}
 
       <div className="flex shrink-0 items-center gap-0.5 opacity-0 transition-opacity group-hover/lesson:opacity-100">
@@ -161,13 +161,13 @@ function SortableLesson({ lesson, isSelected, onSelect, onDelete, onRename }: So
             setEditTitle(lesson.title);
             setIsEditing(true);
           }}
-          className="flex h-5 w-5 items-center justify-center rounded text-zinc-600 hover:bg-zinc-800 hover:text-zinc-300"
+          className="flex h-5 w-5 items-center justify-center rounded text-slate-400 hover:bg-slate-100 hover:text-slate-700"
         >
           <Pencil className="h-2.5 w-2.5" />
         </button>
         <button
           onClick={onDelete}
-          className="flex h-5 w-5 items-center justify-center rounded text-zinc-600 hover:bg-red-500/10 hover:text-red-400"
+          className="flex h-5 w-5 items-center justify-center rounded text-slate-400 hover:bg-red-500/10 hover:text-red-400"
         >
           <X className="h-2.5 w-2.5" />
         </button>
@@ -235,13 +235,13 @@ function ModuleBlock({
     <div className="mb-2">
       {/* Module Header */}
       <div className="group flex items-center gap-1 px-1">
-        <button className="flex h-7 w-7 shrink-0 cursor-grab items-center justify-center text-zinc-600 hover:text-zinc-400">
+        <button className="flex h-7 w-7 shrink-0 cursor-grab items-center justify-center text-slate-400 hover:text-slate-600">
           <GripVertical className="h-3.5 w-3.5" />
         </button>
 
         <button
           onClick={onToggle}
-          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-zinc-800"
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-slate-100"
         >
           {module.expanded ? (
             <ChevronDown className="h-3.5 w-3.5" />
@@ -251,7 +251,7 @@ function ModuleBlock({
         </button>
 
         <div className="flex flex-1 items-center gap-2 min-w-0">
-          <span className="shrink-0 text-xs font-medium text-zinc-500">
+          <span className="shrink-0 text-xs font-medium text-slate-400">
             {moduleIndex + 1}.
           </span>
           {isEditing ? (
@@ -277,7 +277,7 @@ function ModuleBlock({
               {module.title}
             </span>
           )}
-          <span className="shrink-0 text-[10px] text-zinc-600">
+          <span className="shrink-0 text-[10px] text-slate-400">
             {module.lessons.length} {module.lessons.length === 1 ? "lesson" : "lessons"}
           </span>
         </div>
@@ -285,33 +285,33 @@ function ModuleBlock({
         <div className="relative flex shrink-0 items-center gap-0.5 opacity-0 transition-opacity group-hover:opacity-100">
           <button
             onClick={() => setShowAddMenu(!showAddMenu)}
-            className="flex h-6 w-6 items-center justify-center rounded-md text-zinc-600 hover:bg-zinc-800 hover:text-zinc-300"
+            className="flex h-6 w-6 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-700"
           >
             <Plus className="h-3.5 w-3.5" />
           </button>
           <div className="relative">
             <button
               onClick={() => setShowModuleMenu(!showModuleMenu)}
-              className="flex h-6 w-6 items-center justify-center rounded-md text-zinc-600 hover:bg-zinc-800 hover:text-zinc-300"
+              className="flex h-6 w-6 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-700"
             >
               <MoreHorizontal className="h-3.5 w-3.5" />
             </button>
             {showModuleMenu && (
               <>
                 <div className="fixed inset-0 z-10" onClick={() => setShowModuleMenu(false)} />
-                <div className="absolute right-0 top-7 z-20 w-40 rounded-lg border border-border bg-zinc-900 p-1 shadow-xl">
+                <div className="absolute right-0 top-7 z-20 w-40 rounded-lg border border-border bg-white p-1 shadow-xl">
                   <button
                     onClick={() => {
                       setEditTitle(module.title);
                       setIsEditing(true);
                       setShowModuleMenu(false);
                     }}
-                    className="flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-sm text-zinc-300 hover:bg-zinc-800"
+                    className="flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
                   >
                     <Pencil className="h-3 w-3" /> Rename
                   </button>
                   <button
-                    className="flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-sm text-zinc-300 hover:bg-zinc-800"
+                    className="flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
                     onClick={() => setShowModuleMenu(false)}
                   >
                     <Copy className="h-3 w-3" /> Duplicate
@@ -334,7 +334,7 @@ function ModuleBlock({
           {showAddMenu && (
             <>
               <div className="fixed inset-0 z-10" onClick={() => setShowAddMenu(false)} />
-              <div className="absolute right-8 top-7 z-20 w-40 rounded-lg border border-border bg-zinc-900 p-1 shadow-xl">
+              <div className="absolute right-8 top-7 z-20 w-40 rounded-lg border border-border bg-white p-1 shadow-xl">
                 {LESSON_TYPES.map(({ type, icon: TypeIcon, label, color }) => (
                   <button
                     key={type}
@@ -342,7 +342,7 @@ function ModuleBlock({
                       onAddLesson(type);
                       setShowAddMenu(false);
                     }}
-                    className="flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-sm text-zinc-300 hover:bg-zinc-800"
+                    className="flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
                   >
                     <TypeIcon className={cn("h-3.5 w-3.5", color.split(" ")[0])} />
                     {label}
@@ -356,7 +356,7 @@ function ModuleBlock({
 
       {/* Lessons */}
       {module.expanded && (
-        <div className="ml-8 mt-0.5 space-y-0.5 border-l border-zinc-800 pl-3">
+        <div className="ml-8 mt-0.5 space-y-0.5 border-l border-slate-200 pl-3">
           <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
             <SortableContext
               items={module.lessons.map((l) => l.id)}
@@ -377,7 +377,7 @@ function ModuleBlock({
 
           <button
             onClick={() => setShowAddMenu(true)}
-            className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-xs text-zinc-600 transition-colors hover:bg-zinc-800/50 hover:text-zinc-400"
+            className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-xs text-slate-400 transition-colors hover:bg-slate-100/50 hover:text-slate-500"
           >
             <Plus className="h-3 w-3" />
             Add Lesson
@@ -521,7 +521,7 @@ export function CourseBuilder({
       <div className="border-t border-border p-3">
         <button
           onClick={addModule}
-          className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-zinc-700 py-2.5 text-sm text-muted-foreground transition-colors hover:border-zinc-500 hover:text-foreground"
+          className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-slate-200 py-2.5 text-sm text-muted-foreground transition-colors hover:border-slate-400 hover:text-foreground"
         >
           <Plus className="h-3.5 w-3.5" />
           Add Module

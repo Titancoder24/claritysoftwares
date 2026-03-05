@@ -110,11 +110,11 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
 
       {/* Dialog */}
-      <div className="relative z-10 flex h-[640px] w-[820px] overflow-hidden rounded-2xl border border-zinc-800 bg-[#09090b] shadow-2xl shadow-black/40">
+      <div className="relative z-10 flex h-[640px] w-[820px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-black/40">
         {/* Sidebar */}
-        <div className="w-52 shrink-0 border-r border-zinc-800 p-4">
-          <h2 className="mb-1 text-sm font-semibold text-white">Site Settings</h2>
-          <p className="mb-4 text-xs text-zinc-500">Configure your knowledge base</p>
+        <div className="w-52 shrink-0 border-r border-slate-200 p-4">
+          <h2 className="mb-1 text-sm font-semibold text-slate-900">Site Settings</h2>
+          <p className="mb-4 text-xs text-slate-400">Configure your knowledge base</p>
           <nav className="space-y-1">
             {tabs.map(({ id, label, icon: Icon }) => (
               <button
@@ -123,8 +123,8 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
                 className={cn(
                   "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors",
                   activeTab === id
-                    ? "bg-zinc-800 text-white"
-                    : "text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200"
+                    ? "bg-slate-100 text-slate-900"
+                    : "text-slate-500 hover:bg-slate-50 hover:text-slate-800"
                 )}
               >
                 <Icon className="h-4 w-4" />
@@ -137,13 +137,13 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
         {/* Content */}
         <div className="flex flex-1 flex-col">
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-zinc-800 px-6 py-4">
-            <h3 className="text-base font-semibold text-white">
+          <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
+            <h3 className="text-base font-semibold text-slate-900">
               {tabs.find((t) => t.id === activeTab)?.label}
             </h3>
             <button
               onClick={onClose}
-              className="rounded-lg p-1 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white"
+              className="rounded-lg p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-900"
             >
               <X className="h-5 w-5" />
             </button>
@@ -154,7 +154,7 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
             {activeTab === "general" && (
               <div className="space-y-5">
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-zinc-300">
+                  <label className="mb-1.5 block text-sm font-medium text-slate-700">
                     Site Name
                   </label>
                   <Input
@@ -164,7 +164,7 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
                   />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-zinc-300">
+                  <label className="mb-1.5 block text-sm font-medium text-slate-700">
                     Description
                   </label>
                   <textarea
@@ -176,7 +176,7 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
                   />
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-zinc-300">
+                  <label className="mb-1.5 block text-sm font-medium text-slate-700">
                     Subdomain
                   </label>
                   <div className="flex items-center gap-0">
@@ -186,13 +186,13 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
                       className="rounded-r-none"
                       placeholder="docs"
                     />
-                    <div className="flex h-10 items-center rounded-r-lg border border-l-0 border-input bg-zinc-800/50 px-3 text-sm text-zinc-500">
+                    <div className="flex h-10 items-center rounded-r-lg border border-l-0 border-input bg-slate-100 px-3 text-sm text-slate-400">
                       .screenflow.dev
                     </div>
                   </div>
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-zinc-300">
+                  <label className="mb-1.5 block text-sm font-medium text-slate-700">
                     Custom Domain
                   </label>
                   <Input
@@ -201,7 +201,7 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
                     placeholder="docs.yourcompany.com"
                     icon={<Globe className="h-4 w-4" />}
                   />
-                  <p className="mt-1.5 text-xs text-zinc-600">
+                  <p className="mt-1.5 text-xs text-slate-400">
                     Point your CNAME record to cname.screenflow.dev
                   </p>
                 </div>
@@ -211,7 +211,7 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
             {activeTab === "theme" && (
               <div className="space-y-6">
                 <div>
-                  <label className="mb-3 block text-sm font-medium text-zinc-300">
+                  <label className="mb-3 block text-sm font-medium text-slate-700">
                     Primary Color
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -222,17 +222,17 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
                         className={cn(
                           "relative h-9 w-9 rounded-lg transition-all",
                           primaryColor === color.value &&
-                            "ring-2 ring-white ring-offset-2 ring-offset-[#09090b]"
+                            "ring-2 ring-white ring-offset-2 ring-offset-white"
                         )}
                         style={{ backgroundColor: color.value }}
                         title={color.name}
                       >
                         {primaryColor === color.value && (
-                          <Check className="absolute inset-0 m-auto h-4 w-4 text-white" />
+                          <Check className="absolute inset-0 m-auto h-4 w-4 text-slate-900" />
                         )}
                       </button>
                     ))}
-                    <label className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-dashed border-zinc-700 text-zinc-500 transition-colors hover:border-zinc-500">
+                    <label className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-dashed border-slate-200 text-slate-400 transition-colors hover:border-slate-400">
                       <span className="text-lg">+</span>
                       <input
                         type="color"
@@ -245,7 +245,7 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
                 </div>
 
                 <div>
-                  <label className="mb-3 block text-sm font-medium text-zinc-300">
+                  <label className="mb-3 block text-sm font-medium text-slate-700">
                     Accent Color
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -256,13 +256,13 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
                         className={cn(
                           "relative h-9 w-9 rounded-lg transition-all",
                           accentColor === color.value &&
-                            "ring-2 ring-white ring-offset-2 ring-offset-[#09090b]"
+                            "ring-2 ring-white ring-offset-2 ring-offset-white"
                         )}
                         style={{ backgroundColor: color.value }}
                         title={color.name}
                       >
                         {accentColor === color.value && (
-                          <Check className="absolute inset-0 m-auto h-4 w-4 text-white" />
+                          <Check className="absolute inset-0 m-auto h-4 w-4 text-slate-900" />
                         )}
                       </button>
                     ))}
@@ -270,18 +270,18 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
                 </div>
 
                 <div>
-                  <label className="mb-3 block text-sm font-medium text-zinc-300">Logo</label>
-                  <div className="flex h-28 cursor-pointer items-center justify-center rounded-lg border border-dashed border-zinc-800 bg-zinc-900/30 transition-colors hover:border-zinc-600">
+                  <label className="mb-3 block text-sm font-medium text-slate-700">Logo</label>
+                  <div className="flex h-28 cursor-pointer items-center justify-center rounded-lg border border-dashed border-slate-200 bg-slate-50 transition-colors hover:border-slate-300">
                     <div className="text-center">
-                      <Upload className="mx-auto h-6 w-6 text-zinc-500" />
-                      <p className="mt-2 text-xs text-zinc-500">Click to upload or drag and drop</p>
-                      <p className="text-[10px] text-zinc-600">SVG, PNG, or JPG (max 2MB)</p>
+                      <Upload className="mx-auto h-6 w-6 text-slate-400" />
+                      <p className="mt-2 text-xs text-slate-400">Click to upload or drag and drop</p>
+                      <p className="text-[10px] text-slate-400">SVG, PNG, or JPG (max 2MB)</p>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <label className="mb-3 block text-sm font-medium text-zinc-300">Font</label>
+                  <label className="mb-3 block text-sm font-medium text-slate-700">Font</label>
                   <div className="space-y-1.5">
                     {fontOptions.map((font) => (
                       <button
@@ -290,16 +290,16 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
                         className={cn(
                           "flex w-full items-center justify-between rounded-lg border px-4 py-3 text-left transition-all",
                           fontFamily === font.value
-                            ? "border-indigo-500/50 bg-indigo-500/5"
-                            : "border-zinc-800 hover:border-zinc-700"
+                            ? "border-green-500/50 bg-green-500/5"
+                            : "border-slate-200 hover:border-slate-200"
                         )}
                       >
                         <div>
-                          <span className="text-sm font-medium text-zinc-200">{font.name}</span>
-                          <span className="ml-3 text-xs text-zinc-500">{font.sample}</span>
+                          <span className="text-sm font-medium text-slate-800">{font.name}</span>
+                          <span className="ml-3 text-xs text-slate-400">{font.sample}</span>
                         </div>
                         {fontFamily === font.value && (
-                          <Check className="h-4 w-4 text-indigo-400" />
+                          <Check className="h-4 w-4 text-green-600" />
                         )}
                       </button>
                     ))}
@@ -310,7 +310,7 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
 
             {activeTab === "access" && (
               <div className="space-y-4">
-                <p className="text-sm text-zinc-400">
+                <p className="text-sm text-slate-400">
                   Control who can view your knowledge base.
                 </p>
                 {authModes.map((mode) => (
@@ -320,42 +320,42 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
                     className={cn(
                       "flex w-full items-start gap-4 rounded-xl border p-4 text-left transition-all",
                       authMode === mode.id
-                        ? "border-indigo-500/50 bg-indigo-500/5"
-                        : "border-zinc-800 hover:border-zinc-700"
+                        ? "border-green-500/50 bg-green-500/5"
+                        : "border-slate-200 hover:border-slate-200"
                     )}
                   >
                     <div
                       className={cn(
                         "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg",
-                        authMode === mode.id ? "bg-indigo-500/10 text-indigo-400" : "bg-zinc-800/50 text-zinc-500"
+                        authMode === mode.id ? "bg-green-500/10 text-green-600" : "bg-slate-100 text-slate-400"
                       )}
                     >
                       <mode.icon className="h-5 w-5" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium text-zinc-200">{mode.label}</span>
+                        <span className="text-sm font-medium text-slate-800">{mode.label}</span>
                         <div
                           className={cn(
                             "h-4 w-4 rounded-full border-2 transition-colors",
                             authMode === mode.id
-                              ? "border-indigo-500 bg-indigo-500"
-                              : "border-zinc-600"
+                              ? "border-green-500 bg-green-500"
+                              : "border-slate-300"
                           )}
                         >
                           {authMode === mode.id && (
-                            <Check className="h-full w-full p-0.5 text-white" />
+                            <Check className="h-full w-full p-0.5 text-slate-900" />
                           )}
                         </div>
                       </div>
-                      <p className="mt-0.5 text-xs text-zinc-500">{mode.description}</p>
+                      <p className="mt-0.5 text-xs text-slate-400">{mode.description}</p>
                     </div>
                   </button>
                 ))}
 
                 {authMode === "password" && (
-                  <div className="mt-4 rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
-                    <label className="mb-1.5 block text-sm font-medium text-zinc-300">
+                  <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-4">
+                    <label className="mb-1.5 block text-sm font-medium text-slate-700">
                       Access Password
                     </label>
                     <Input type="password" placeholder="Enter a shared password" />
@@ -367,7 +367,7 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
             {activeTab === "seo" && (
               <div className="space-y-5">
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-zinc-300">
+                  <label className="mb-1.5 block text-sm font-medium text-slate-700">
                     Meta Title
                   </label>
                   <Input
@@ -375,12 +375,12 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
                     onChange={(e) => setMetaTitle(e.target.value)}
                     placeholder="Product Documentation - Your Company"
                   />
-                  <p className="mt-1 text-xs text-zinc-600">
+                  <p className="mt-1 text-xs text-slate-400">
                     {metaTitle.length}/60 characters recommended
                   </p>
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-zinc-300">
+                  <label className="mb-1.5 block text-sm font-medium text-slate-700">
                     Meta Description
                   </label>
                   <textarea
@@ -390,28 +390,28 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
                     className="w-full rounded-lg border border-input bg-muted px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground transition-all focus:outline-none focus:ring-2 focus:ring-ring/50 focus:border-primary"
                     placeholder="A brief description for search engines..."
                   />
-                  <p className="mt-1 text-xs text-zinc-600">
+                  <p className="mt-1 text-xs text-slate-400">
                     {metaDescription.length}/160 characters recommended
                   </p>
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-zinc-300">
+                  <label className="mb-1.5 block text-sm font-medium text-slate-700">
                     OG Image
                   </label>
-                  <div className="flex h-32 cursor-pointer items-center justify-center rounded-lg border border-dashed border-zinc-800 bg-zinc-900/30 transition-colors hover:border-zinc-600">
+                  <div className="flex h-32 cursor-pointer items-center justify-center rounded-lg border border-dashed border-slate-200 bg-slate-50 transition-colors hover:border-slate-300">
                     <div className="text-center">
-                      <Upload className="mx-auto h-6 w-6 text-zinc-500" />
-                      <p className="mt-2 text-xs text-zinc-500">1200 x 630px recommended</p>
+                      <Upload className="mx-auto h-6 w-6 text-slate-400" />
+                      <p className="mt-2 text-xs text-slate-400">1200 x 630px recommended</p>
                     </div>
                   </div>
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-zinc-300">
+                  <label className="mb-1.5 block text-sm font-medium text-slate-700">
                     Favicon
                   </label>
                   <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900">
-                      <Globe className="h-5 w-5 text-zinc-500" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-slate-200 bg-white">
+                      <Globe className="h-5 w-5 text-slate-400" />
                     </div>
                     <Button variant="outline" size="sm">
                       <Upload className="h-3.5 w-3.5" />
@@ -422,17 +422,17 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
 
                 {/* SEO Preview */}
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-zinc-300">
+                  <label className="mb-2 block text-sm font-medium text-slate-700">
                     Search Preview
                   </label>
-                  <div className="rounded-lg border border-zinc-800 bg-zinc-900/30 p-4">
-                    <div className="text-sm text-indigo-400">
+                  <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                    <div className="text-sm text-green-600">
                       {metaTitle || name || "Your Knowledge Base"} - ScreenFlow
                     </div>
                     <div className="mt-0.5 text-xs text-emerald-500">
                       {subdomain}.screenflow.dev
                     </div>
-                    <div className="mt-1 text-xs leading-relaxed text-zinc-500">
+                    <div className="mt-1 text-xs leading-relaxed text-slate-400">
                       {metaDescription || description || "No description provided."}
                     </div>
                   </div>
@@ -442,10 +442,10 @@ export default function SiteSettings({ open, onClose, onSave }: SiteSettingsProp
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between border-t border-zinc-800 px-6 py-4">
+          <div className="flex items-center justify-between border-t border-slate-200 px-6 py-4">
             <a
               href="#"
-              className="flex items-center gap-1 text-xs text-zinc-500 transition-colors hover:text-zinc-300"
+              className="flex items-center gap-1 text-xs text-slate-400 transition-colors hover:text-slate-700"
             >
               <ExternalLink className="h-3 w-3" />
               View live site

@@ -43,8 +43,8 @@ function Switch({
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         "disabled:cursor-not-allowed disabled:opacity-50",
         checked
-          ? "bg-gradient-to-r from-indigo-600 to-violet-600"
-          : "bg-zinc-700",
+          ? "bg-green-600"
+          : "bg-slate-300",
         className
       )}
     >

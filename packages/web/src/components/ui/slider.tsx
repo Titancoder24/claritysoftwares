@@ -38,7 +38,7 @@ function Slider({
     <div className={cn("relative flex w-full items-center", className)}>
       <div className="relative h-2 w-full rounded-full bg-muted">
         <div
-          className="absolute h-full rounded-full bg-gradient-to-r from-indigo-600 to-violet-600"
+          className="absolute h-full rounded-full bg-green-600"
           style={{ width: `${percentage}%` }}
         />
       </div>

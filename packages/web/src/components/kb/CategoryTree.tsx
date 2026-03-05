@@ -95,9 +95,9 @@ function CategoryNode({
         className={cn(
           "group relative flex items-center gap-1 rounded-lg px-2 py-1.5 transition-all duration-150 cursor-pointer",
           isActive
-            ? "bg-indigo-500/10 text-indigo-400"
-            : "text-zinc-400 hover:bg-zinc-800/60 hover:text-zinc-200",
-          isDragOver && "ring-1 ring-indigo-500/50 bg-indigo-500/5"
+            ? "bg-green-500/10 text-green-600"
+            : "text-slate-500 hover:bg-slate-100 hover:text-slate-900",
+          isDragOver && "ring-1 ring-green-500/50 bg-green-500/5"
         )}
         style={{ paddingLeft: `${depth * 16 + 8}px` }}
         onClick={() => onSelectCategory(category.id)}
@@ -110,13 +110,13 @@ function CategoryNode({
         onDrop={() => setIsDragOver(false)}
       >
         {/* Drag Handle */}
-        <div className="shrink-0 cursor-grab text-zinc-600 opacity-0 transition-opacity group-hover:opacity-100 active:cursor-grabbing">
+        <div className="shrink-0 cursor-grab text-slate-400 opacity-0 transition-opacity group-hover:opacity-100 active:cursor-grabbing">
           <GripVertical className="h-3.5 w-3.5" />
         </div>
 
         {/* Expand/Collapse */}
         <button
-          className="shrink-0 rounded p-0.5 transition-colors hover:bg-zinc-700/50"
+          className="shrink-0 rounded p-0.5 transition-colors hover:bg-slate-100"
           onClick={(e) => {
             e.stopPropagation();
             setExpanded(!expanded);
@@ -135,16 +135,16 @@ function CategoryNode({
 
         {/* Folder Icon */}
         {expanded && hasChildren ? (
-          <FolderOpen className="h-4 w-4 shrink-0 text-indigo-400/70" />
+          <FolderOpen className="h-4 w-4 shrink-0 text-green-500/70" />
         ) : (
-          <Folder className="h-4 w-4 shrink-0 text-zinc-500" />
+          <Folder className="h-4 w-4 shrink-0 text-slate-400" />
         )}
 
         {/* Name */}
         <span className="min-w-0 flex-1 truncate text-sm font-medium">{category.name}</span>
 
         {/* Page Count */}
-        <span className="shrink-0 text-[10px] tabular-nums text-zinc-600 group-hover:hidden">
+        <span className="shrink-0 text-[10px] tabular-nums text-slate-400 group-hover:hidden">
           {category.pages.length}
         </span>
 
@@ -155,7 +155,7 @@ function CategoryNode({
               e.stopPropagation();
               onAddPage(category.id);
             }}
-            className="rounded p-1 text-zinc-500 transition-colors hover:bg-zinc-700 hover:text-zinc-200"
+            className="rounded p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-900"
             title="Add page"
           >
             <Plus className="h-3 w-3" />
@@ -166,20 +166,20 @@ function CategoryNode({
                 e.stopPropagation();
                 setMenuOpen(!menuOpen);
               }}
-              className="rounded p-1 text-zinc-500 transition-colors hover:bg-zinc-700 hover:text-zinc-200"
+              className="rounded p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-900"
             >
               <MoreHorizontal className="h-3 w-3" />
             </button>
             {menuOpen && (
               <>
                 <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
-                <div className="absolute right-0 top-6 z-50 w-44 rounded-lg border border-zinc-800 bg-zinc-900 py-1 shadow-xl shadow-black/30">
+                <div className="absolute right-0 top-6 z-50 w-44 rounded-lg border border-slate-200 bg-white py-1 shadow-xl shadow-slate-200/50">
                   <button
                     onClick={() => {
                       onAddPage(category.id);
                       setMenuOpen(false);
                     }}
-                    className="flex w-full items-center gap-2.5 px-3 py-1.5 text-xs text-zinc-300 hover:bg-zinc-800 hover:text-white"
+                    className="flex w-full items-center gap-2.5 px-3 py-1.5 text-xs text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                   >
                     <FileText className="h-3 w-3" /> Add Page
                   </button>
@@ -188,7 +188,7 @@ function CategoryNode({
                       onAddCategory(category.id);
                       setMenuOpen(false);
                     }}
-                    className="flex w-full items-center gap-2.5 px-3 py-1.5 text-xs text-zinc-300 hover:bg-zinc-800 hover:text-white"
+                    className="flex w-full items-center gap-2.5 px-3 py-1.5 text-xs text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                   >
                     <FolderPlus className="h-3 w-3" /> Add Subcategory
                   </button>
@@ -197,11 +197,11 @@ function CategoryNode({
                       onEditCategory(category.id);
                       setMenuOpen(false);
                     }}
-                    className="flex w-full items-center gap-2.5 px-3 py-1.5 text-xs text-zinc-300 hover:bg-zinc-800 hover:text-white"
+                    className="flex w-full items-center gap-2.5 px-3 py-1.5 text-xs text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                   >
                     <Pencil className="h-3 w-3" /> Rename
                   </button>
-                  <div className="my-1 border-t border-zinc-800" />
+                  <div className="my-1 border-t border-slate-200" />
                   <button
                     onClick={() => {
                       onDeleteCategory(category.id);
@@ -231,8 +231,8 @@ function CategoryNode({
                 className={cn(
                   "group flex items-center gap-2 rounded-lg px-2 py-1.5 transition-all duration-150 cursor-pointer",
                   isPageActive
-                    ? "bg-indigo-500/10 text-indigo-300"
-                    : "text-zinc-500 hover:bg-zinc-800/40 hover:text-zinc-300"
+                    ? "bg-green-500/10 text-green-600"
+                    : "text-slate-500 hover:bg-slate-100 hover:text-slate-700"
                 )}
                 style={{ paddingLeft: `${(depth + 1) * 16 + 24}px` }}
                 onClick={() => onSelectPage(page.id, category.id)}
@@ -287,14 +287,14 @@ export default function CategoryTree({
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-2">
-          <BookOpen className="h-4 w-4 text-indigo-400" />
-          <span className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+          <BookOpen className="h-4 w-4 text-green-600" />
+          <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
             Categories
           </span>
         </div>
         <button
           onClick={() => onAddCategory()}
-          className="rounded-md p-1 text-zinc-500 transition-colors hover:bg-zinc-800 hover:text-zinc-200"
+          className="rounded-md p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-900"
           title="New Category"
         >
           <Plus className="h-3.5 w-3.5" />
@@ -321,11 +321,11 @@ export default function CategoryTree({
           ))
         ) : (
           <div className="px-4 py-8 text-center">
-            <Folder className="mx-auto h-8 w-8 text-zinc-700" />
-            <p className="mt-2 text-xs text-zinc-600">No categories yet</p>
+            <Folder className="mx-auto h-8 w-8 text-slate-300" />
+            <p className="mt-2 text-xs text-slate-400">No categories yet</p>
             <button
               onClick={() => onAddCategory()}
-              className="mt-2 text-xs font-medium text-indigo-400 transition-colors hover:text-indigo-300"
+              className="mt-2 text-xs font-medium text-green-600 transition-colors hover:text-green-500"
             >
               Create your first category
             </button>
@@ -334,10 +334,10 @@ export default function CategoryTree({
       </div>
 
       {/* Footer */}
-      <div className="border-t border-zinc-800/50 px-4 py-3">
+      <div className="border-t border-slate-200 px-4 py-3">
         <button
           onClick={() => onAddCategory()}
-          className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-zinc-800 px-3 py-2 text-xs font-medium text-zinc-500 transition-all hover:border-zinc-600 hover:bg-zinc-800/30 hover:text-zinc-300"
+          className="flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-slate-200 px-3 py-2 text-xs font-medium text-slate-400 transition-all hover:border-slate-400 hover:bg-slate-50 hover:text-slate-700"
         >
           <FolderPlus className="h-3.5 w-3.5" />
           New Category

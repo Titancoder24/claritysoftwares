@@ -62,7 +62,7 @@ const mockRecordings: Recording[] = [
   {
     id: "rec_01",
     title: "Onboarding Flow Walkthrough",
-    thumbnailColor: "from-indigo-600/40 to-violet-700/30",
+    thumbnailColor: "from-green-500/40 to-emerald-600/30",
     duration: "4:32",
     durationSeconds: 272,
     views: 1_243,
@@ -73,7 +73,7 @@ const mockRecordings: Recording[] = [
   {
     id: "rec_02",
     title: "Dashboard Overview — Sprint 14 Demo",
-    thumbnailColor: "from-cyan-600/40 to-blue-700/30",
+    thumbnailColor: "from-cyan-500/40 to-teal-600/30",
     duration: "2:15",
     durationSeconds: 135,
     views: 892,
@@ -84,7 +84,7 @@ const mockRecordings: Recording[] = [
   {
     id: "rec_03",
     title: "API Integration Tutorial (v2)",
-    thumbnailColor: "from-emerald-600/40 to-teal-700/30",
+    thumbnailColor: "from-emerald-500/40 to-green-600/30",
     duration: "8:47",
     durationSeconds: 527,
     views: 2_104,
@@ -95,7 +95,7 @@ const mockRecordings: Recording[] = [
   {
     id: "rec_04",
     title: "New Feature Announcement — Dark Mode",
-    thumbnailColor: "from-amber-600/40 to-orange-700/30",
+    thumbnailColor: "from-amber-400/40 to-orange-500/30",
     duration: "1:30",
     durationSeconds: 90,
     views: 0,
@@ -106,7 +106,7 @@ const mockRecordings: Recording[] = [
   {
     id: "rec_05",
     title: "Customer Support Workflow Recording",
-    thumbnailColor: "from-rose-600/40 to-pink-700/30",
+    thumbnailColor: "from-rose-400/40 to-pink-500/30",
     duration: "6:12",
     durationSeconds: 372,
     views: 456,
@@ -117,7 +117,7 @@ const mockRecordings: Recording[] = [
   {
     id: "rec_06",
     title: "Settings & Configuration Guide",
-    thumbnailColor: "from-fuchsia-600/40 to-purple-700/30",
+    thumbnailColor: "from-teal-500/40 to-emerald-600/30",
     duration: "3:45",
     durationSeconds: 225,
     views: 318,
@@ -128,7 +128,7 @@ const mockRecordings: Recording[] = [
   {
     id: "rec_07",
     title: "Bug Repro — Table Sorting Issue #482",
-    thumbnailColor: "from-red-600/40 to-rose-700/30",
+    thumbnailColor: "from-red-400/40 to-rose-500/30",
     duration: "0:48",
     durationSeconds: 48,
     views: 37,
@@ -139,7 +139,7 @@ const mockRecordings: Recording[] = [
   {
     id: "rec_08",
     title: "Team Standup — Feb 18",
-    thumbnailColor: "from-sky-600/40 to-indigo-700/30",
+    thumbnailColor: "from-sky-400/40 to-green-500/30",
     duration: "12:05",
     durationSeconds: 725,
     views: 0,
@@ -150,7 +150,7 @@ const mockRecordings: Recording[] = [
   {
     id: "rec_09",
     title: "Product Roadmap Presentation Q1",
-    thumbnailColor: "from-lime-600/40 to-green-700/30",
+    thumbnailColor: "from-lime-500/40 to-green-600/30",
     duration: "15:22",
     durationSeconds: 922,
     views: 1_589,
@@ -161,7 +161,7 @@ const mockRecordings: Recording[] = [
   {
     id: "rec_10",
     title: "Design System Components Overview",
-    thumbnailColor: "from-violet-600/40 to-indigo-700/30",
+    thumbnailColor: "from-green-400/40 to-emerald-500/30",
     duration: "5:10",
     durationSeconds: 310,
     views: 671,
@@ -228,12 +228,12 @@ function RecordingCard({ recording }: { recording: Recording }) {
   return (
     <Card
       className={cn(
-        "group overflow-hidden transition-colors duration-150",
-        "hover:border-zinc-600 cursor-pointer"
+        "group overflow-hidden bg-white border-slate-200 transition-colors duration-150",
+        "hover:border-green-300 hover:shadow-md cursor-pointer"
       )}
     >
       {/* Thumbnail */}
-      <div className="relative aspect-video overflow-hidden bg-[#0f0f12]">
+      <div className="relative aspect-video overflow-hidden bg-slate-100">
         <div
           className={cn(
             "absolute inset-0 bg-gradient-to-br",
@@ -242,10 +242,10 @@ function RecordingCard({ recording }: { recording: Recording }) {
         />
         {/* Grid pattern overlay */}
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
+              "linear-gradient(rgba(0,0,0,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.08) 1px, transparent 1px)",
             backgroundSize: "24px 24px",
           }}
         />
@@ -253,18 +253,18 @@ function RecordingCard({ recording }: { recording: Recording }) {
         {/* Play button overlay */}
         <div className="absolute inset-0 flex items-center justify-center">
           {isProcessing ? (
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black/50 backdrop-blur-sm">
-              <Loader2 className="h-5 w-5 text-amber-400 animate-spin" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/70 backdrop-blur-sm shadow-sm">
+              <Loader2 className="h-5 w-5 text-amber-500 animate-spin" />
             </div>
           ) : (
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur-sm transition-opacity duration-150 group-hover:opacity-100">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-600/90 text-white opacity-0 backdrop-blur-sm shadow-sm transition-opacity duration-150 group-hover:opacity-100">
               <Play className="h-4 w-4 ml-0.5 fill-current" />
             </div>
           )}
         </div>
 
         {/* Duration pill */}
-        <div className="absolute bottom-2 right-2 rounded-md bg-black/70 px-1.5 py-0.5 text-[11px] font-medium text-zinc-200 tabular-nums backdrop-blur-sm">
+        <div className="absolute bottom-2 right-2 rounded-md bg-slate-900/70 px-1.5 py-0.5 text-[11px] font-medium text-white tabular-nums backdrop-blur-sm">
           {recording.duration}
         </div>
 
@@ -280,10 +280,10 @@ function RecordingCard({ recording }: { recording: Recording }) {
       <CardContent className="p-3.5">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 flex-1">
-            <h3 className="truncate text-[13px] font-medium text-zinc-100 leading-snug">
+            <h3 className="truncate text-[13px] font-medium text-slate-900 leading-snug">
               {recording.title}
             </h3>
-            <div className="mt-2 flex items-center gap-3 text-[11px] text-zinc-500">
+            <div className="mt-2 flex items-center gap-3 text-[11px] text-slate-500">
               <span className="flex items-center gap-1">
                 <Calendar className="h-3 w-3" />
                 {recording.createdAt}
@@ -297,7 +297,7 @@ function RecordingCard({ recording }: { recording: Recording }) {
 
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <button className="rounded-md p-1 text-zinc-600 transition-colors hover:bg-zinc-800 hover:text-zinc-300">
+              <button className="rounded-md p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700">
                 <MoreVertical className="h-4 w-4" />
               </button>
             </DropdownMenuTrigger>
@@ -343,14 +343,14 @@ function EmptyState({
   activeTab: string;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-zinc-800 bg-zinc-950/50 py-20 px-6 text-center">
-      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-800/80 text-zinc-500">
+    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 py-20 px-6 text-center">
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-50 text-green-600">
         <Film className="h-6 w-6" />
       </div>
-      <h3 className="mt-4 text-sm font-medium text-zinc-300">
+      <h3 className="mt-4 text-sm font-medium text-slate-800">
         {hasSearch ? "No recordings found" : "No recordings yet"}
       </h3>
-      <p className="mt-1.5 max-w-sm text-[13px] text-zinc-600">
+      <p className="mt-1.5 max-w-sm text-[13px] text-slate-500">
         {hasSearch
           ? `No recordings match your ${activeTab !== "all" ? "filter and " : ""}search query. Try a different search term.`
           : "Create your first screen recording to get started. It only takes a few seconds."}
@@ -423,10 +423,10 @@ export default function RecordingsPage() {
       {/* ----------------------------------------------------------------- */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-zinc-50">
+          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
             Recordings
           </h1>
-          <p className="mt-1 text-sm text-zinc-500">
+          <p className="mt-1 text-sm text-slate-500">
             Capture, edit, and share screen recordings with your team.
           </p>
         </div>
@@ -451,25 +451,25 @@ export default function RecordingsPage() {
           <TabsList>
             <TabsTrigger value="all">
               All
-              <span className="ml-1.5 text-[10px] text-zinc-500">
+              <span className="ml-1.5 text-[10px] text-slate-400">
                 {tabCounts.all}
               </span>
             </TabsTrigger>
             <TabsTrigger value="processing">
               Processing
-              <span className="ml-1.5 text-[10px] text-zinc-500">
+              <span className="ml-1.5 text-[10px] text-slate-400">
                 {tabCounts.processing ?? 0}
               </span>
             </TabsTrigger>
             <TabsTrigger value="completed">
               Completed
-              <span className="ml-1.5 text-[10px] text-zinc-500">
+              <span className="ml-1.5 text-[10px] text-slate-400">
                 {tabCounts.completed ?? 0}
               </span>
             </TabsTrigger>
             <TabsTrigger value="published">
               Published
-              <span className="ml-1.5 text-[10px] text-zinc-500">
+              <span className="ml-1.5 text-[10px] text-slate-400">
                 {tabCounts.published ?? 0}
               </span>
             </TabsTrigger>
@@ -490,7 +490,7 @@ export default function RecordingsPage() {
 
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <Button variant="outline" size="sm" className="gap-1.5 text-zinc-400">
+              <Button variant="outline" size="sm" className="gap-1.5 text-slate-500">
                 <ArrowUpDown className="h-3 w-3" />
                 {currentSortLabel}
                 <ChevronDown className="h-3 w-3 opacity-50" />
@@ -505,8 +505,8 @@ export default function RecordingsPage() {
                   <span
                     className={cn(
                       sortBy === option.value
-                        ? "text-zinc-100 font-medium"
-                        : "text-zinc-400"
+                        ? "text-green-700 font-medium"
+                        : "text-slate-600"
                     )}
                   >
                     {option.label}
@@ -535,12 +535,12 @@ export default function RecordingsPage() {
       {/* Footer summary                                                    */}
       {/* ----------------------------------------------------------------- */}
       {filtered.length > 0 && (
-        <div className="flex items-center justify-between border-t border-zinc-800/60 pt-4 text-xs text-zinc-600">
+        <div className="flex items-center justify-between border-t border-slate-200 pt-4 text-xs text-slate-500">
           <span>
             {filtered.length}{" "}
             {filtered.length === 1 ? "recording" : "recordings"}
             {activeTab !== "all" && (
-              <span className="text-zinc-700">
+              <span className="text-slate-400">
                 {" "}
                 of {mockRecordings.length} total
               </span>

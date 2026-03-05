@@ -110,7 +110,7 @@ function ProfileTab() {
                 className="h-16 w-16 text-lg"
               />
               <button
-                className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full border-2 border-card bg-muted text-muted-foreground transition-colors hover:bg-zinc-700 hover:text-foreground"
+                className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full border-2 border-card bg-muted text-muted-foreground transition-colors hover:bg-slate-100 hover:text-foreground"
                 aria-label="Change avatar"
               >
                 <Camera className="h-3.5 w-3.5" />
@@ -548,7 +548,7 @@ function ConnectedAccountsTab() {
                 className={cn(
                   "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg",
                   account.connected
-                    ? "bg-indigo-500/15 text-indigo-400"
+                    ? "bg-green-500/15 text-green-600"
                     : "bg-muted text-muted-foreground"
                 )}
               >

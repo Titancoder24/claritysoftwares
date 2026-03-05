@@ -91,9 +91,9 @@ function StatusBadge({ status }: { status: KBSite["status"] }) {
       <span
         className={cn(
           "mr-1.5 inline-block h-1.5 w-1.5 rounded-full",
-          status === "published" && "bg-emerald-400",
-          status === "draft" && "bg-amber-400",
-          status === "archived" && "bg-zinc-400"
+          status === "published" && "bg-emerald-600",
+          status === "draft" && "bg-amber-600",
+          status === "archived" && "bg-slate-400"
         )}
       />
       {status.charAt(0).toUpperCase() + status.slice(1)}
@@ -105,11 +105,11 @@ function SiteCard({ site }: { site: KBSite }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="group relative rounded-xl border border-border bg-card transition-all duration-200 hover:border-zinc-700 hover:shadow-lg hover:shadow-black/10">
+    <div className="group relative rounded-xl border border-border bg-card transition-all duration-200 hover:border-slate-300 hover:shadow-lg hover:shadow-slate-200/60">
       <div className="p-6">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/10 text-green-600">
               <BookOpen className="h-5 w-5" />
             </div>
             <div>
@@ -130,14 +130,14 @@ function SiteCard({ site }: { site: KBSite }) {
             {menuOpen && (
               <>
                 <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
-                <div className="absolute right-0 top-8 z-50 w-48 rounded-lg border border-border bg-zinc-900 py-1 shadow-xl shadow-black/20">
-                  <button className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-white">
+                <div className="absolute right-0 top-8 z-50 w-48 rounded-lg border border-border bg-white py-1 shadow-xl shadow-slate-200/60">
+                  <button className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900">
                     <Settings className="h-3.5 w-3.5" /> Settings
                   </button>
-                  <button className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-white">
+                  <button className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900">
                     <ExternalLink className="h-3.5 w-3.5" /> View Live
                   </button>
-                  <button className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-white">
+                  <button className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900">
                     <Copy className="h-3.5 w-3.5" /> Duplicate
                   </button>
                   <div className="my-1 border-t border-border" />
@@ -176,7 +176,7 @@ function SiteCard({ site }: { site: KBSite }) {
         </div>
         <a
           href={`/kb/${site.id}`}
-          className="flex items-center gap-1 text-xs font-medium text-indigo-400 transition-colors hover:text-indigo-300"
+          className="flex items-center gap-1 text-xs font-medium text-green-600 transition-colors hover:text-green-700"
         >
           Edit <ArrowUpRight className="h-3 w-3" />
         </a>
